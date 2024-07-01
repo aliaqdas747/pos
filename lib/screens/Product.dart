@@ -1,8 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:point_of_sale/screens/Category.dart';
 import '../utils/Summary_card.dart';
 import '../utils/TextField.dart';
-import '../utils/action_btn.dart';
 import 'homePage.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -11,8 +11,9 @@ class ProductScreen extends StatefulWidget {
   @override
   State<ProductScreen> createState() => _ProductScreenState();
 }
-var PrimaryClr = Color(0xFF6C63FF);
+
 class _ProductScreenState extends State<ProductScreen> {
+  final Color primaryClr =const Color(0xFF6C63FF);
   @override
 
   Widget build(BuildContext context) {
@@ -24,11 +25,11 @@ class _ProductScreenState extends State<ProductScreen> {
           elevation: 10.0,
           centerTitle: true,
           title: Text("POINT OF SALE", style: Theme.of(context).textTheme.headlineLarge),
-          actions: [
+          actions:const [
 
-            SizedBox(width: 30,)
+           SizedBox(width: 30,)
           ],
-          backgroundColor: PrimaryClr,
+          backgroundColor: primaryClr,
         ),
         body:     Row(
 
@@ -37,13 +38,13 @@ class _ProductScreenState extends State<ProductScreen> {
 
               child: Container(
                 width: 300, // Set the width of the drawer
-                color: PrimaryClr, // Optional background color for the drawer
+                color: primaryClr, // Optional background color for the drawer
                 child: SingleChildScrollView(
                   child: Column(
 
                     children: [
 
-                      Container(height: 200,width: double.infinity,
+                      SizedBox(height: 200,width: double.infinity,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -54,47 +55,47 @@ class _ProductScreenState extends State<ProductScreen> {
                       ),
                       InkWell(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> MyHomePage()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const MyHomePage()));
                         },
                         child: ListTile(
-                          leading: Icon(Icons.dashboard, color: Colors.white),
+                          leading:const Icon(Icons.dashboard, color: Colors.white),
                           title: Text('DASHBOARD', style: Theme.of(context).textTheme.headlineSmall ),
                         ),
                       ),
                       InkWell(
                         onTap: (){
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> ProductScreen()));
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const ProductScreen()));
                         },
                         child: ListTile(
-                          leading: Icon(Icons.shopping_bag, color: Colors.white),
+                          leading:const Icon(Icons.shopping_bag, color: Colors.white),
                           title: Text('PRODUCTS', style: Theme.of(context).textTheme.headlineSmall),
                         ),
                       ),
                       InkWell(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> MyHomePage()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const CategoryScreen()));
                         },
                         child: ListTile(
-                          leading: Icon(Icons.category, color: Colors.white),
+                          leading:const Icon(Icons.category, color: Colors.white),
                           title: Text('CATEGORY', style: Theme.of(context).textTheme.headlineSmall),
                         ),
                       ),
                       InkWell(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> MyHomePage()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const MyHomePage()));
                         },
                         child: ListTile(
-                          leading: Icon(Icons.receipt,color: Colors.white),
+                          leading:const Icon(Icons.receipt,color: Colors.white),
                           title: Text('SALES RECORDS', style: Theme.of(context).textTheme.headlineSmall),
                         ),
                       ),
 
                       InkWell(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> MyHomePage()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyHomePage()));
                         },
                         child: ListTile(
-                            leading: Icon(Icons.bar_chart, color: Colors.white),
+                            leading: const Icon(Icons.bar_chart, color: Colors.white),
                             title: Text('REPORTS', style: Theme.of(context).textTheme.headlineSmall)),
                       ),
 
@@ -116,9 +117,9 @@ class _ProductScreenState extends State<ProductScreen> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      Container(
+                     Container(
                         margin: EdgeInsets.all(20),
-                        child: Row(
+                        child:const Row(
 
                           children: [
                             Expanded(
@@ -141,27 +142,27 @@ class _ProductScreenState extends State<ProductScreen> {
                         height: 50,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: PrimaryClr,
+                          color: primaryClr,
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
                      Container(
-                       margin: EdgeInsets.only(left: 20,right: 20,bottom: 10),
+                       margin:const EdgeInsets.only(left: 20,right: 20,bottom: 10),
                        height: 50,width:double.infinity,
                      child: SizedBox(
                        width: 100,
-                       child:   TextField(style: TextStyle(color: Colors.white),
+                       child:   TextField(style: TextStyle(color: primaryClr),
 
                          decoration: InputDecoration(
 
-                           suffixIcon: IconButton(onPressed: (){}, icon: Icon(Icons.search,color: PrimaryClr),),
-                           label: Text("Search here...", style: TextStyle(color: PrimaryClr,),),
+                           suffixIcon: IconButton(onPressed: (){}, icon: Icon(Icons.search,color: primaryClr),),
+                           label: Text("Search here...", style: TextStyle(color: primaryClr,fontSize: 25),),
                            enabledBorder: OutlineInputBorder(
-                             borderSide: BorderSide(color: PrimaryClr, width: 1.0),
+                             borderSide: BorderSide(color: primaryClr, width: 1.0),
                              borderRadius: BorderRadius.circular(10),
                            ),
                            focusedBorder: OutlineInputBorder(
-                             borderSide: BorderSide(color: PrimaryClr, width: 1.0),
+                             borderSide: BorderSide(color: primaryClr, width: 1.0),
                              borderRadius: BorderRadius.circular(10),
                            ),
                          ),
@@ -170,22 +171,22 @@ class _ProductScreenState extends State<ProductScreen> {
                      ),
                       Container(
                         decoration: BoxDecoration(
-                            color: PrimaryClr,
-                            borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10))
+                            color: primaryClr,
+                            borderRadius:const  BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10))
                         ),
-                        margin: EdgeInsets.only(left: 20, right: 20),
+                        margin:const EdgeInsets.only(left: 20, right: 20),
                         height: 300,
                         width: double.infinity,
                         child: DataTable(
-                          columns: [
+                          columns: const [
                             DataColumn(label: Text('Product ID')),
                             DataColumn(label: Text('Name')),
                             DataColumn(label: Text('CATEGORY')),
                             DataColumn(label: Text('Price')),
                           ],
-                          rows: [
+                          rows:const [
                             DataRow(
-                              cells: [
+                              cells:  [
                                 DataCell(Text('1')),
                                 DataCell(Text('Apple iPhone')),
                                 DataCell(Text('2')),
@@ -193,7 +194,7 @@ class _ProductScreenState extends State<ProductScreen> {
                               ],
                             ),
                             DataRow(
-                              cells: [
+                              cells:  [
                                 DataCell(Text('2')),
                                 DataCell(Text('Samsung TV')),
                                 DataCell(Text('1')),
@@ -201,7 +202,7 @@ class _ProductScreenState extends State<ProductScreen> {
                               ],
                             ),
                             DataRow(
-                              cells: [
+                              cells:  [
                                 DataCell(Text('3')),
                                 DataCell(Text('Nike Shoes')),
                                 DataCell(Text('3')),
@@ -213,8 +214,8 @@ class _ProductScreenState extends State<ProductScreen> {
                       ),
                       Container(
                         width: double.infinity,
-                        margin: EdgeInsets.only(left: 20, right: 20, bottom: 10),
-                        padding: EdgeInsets.symmetric(vertical: 10),
+                        margin: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                        padding:const EdgeInsets.symmetric(vertical: 10),
                         decoration: BoxDecoration(
                           color: Colors.grey[300],
                           borderRadius: BorderRadius.circular(10),
@@ -229,12 +230,12 @@ class _ProductScreenState extends State<ProductScreen> {
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.teal,
-                                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                padding:const  EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
-                              child: Text(
+                              child:const  Text(
                                 "Save Product",
                                 style: TextStyle(color: Colors.white, fontSize: 16),
                               ),
@@ -246,12 +247,12 @@ class _ProductScreenState extends State<ProductScreen> {
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.blue,
-                                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 "UPDATE",
                                 style: TextStyle(color: Colors.white, fontSize: 16),
                               ),
@@ -266,12 +267,12 @@ class _ProductScreenState extends State<ProductScreen> {
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.red,
-                                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                padding:const  EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 "DELETE ITEM",
                                 style: TextStyle(color: Colors.white, fontSize: 16),
                               ),
@@ -282,12 +283,12 @@ class _ProductScreenState extends State<ProductScreen> {
 
                       Container(
                         decoration: BoxDecoration(
-                            color: PrimaryClr,
-                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10))
+                            color: primaryClr,
+                            borderRadius:const BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10))
                         ),
-                        margin: EdgeInsets.only(left: 20,right: 20),
+                        margin:const EdgeInsets.only(left: 20,right: 20),
                         width: double.infinity,
-                        child: Wrap(
+                        child:const  Wrap(
                           alignment: WrapAlignment.center,
                           children: [
 

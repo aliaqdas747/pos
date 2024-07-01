@@ -18,7 +18,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var PrimaryClr = Color(0xFF6C63FF);
+  final Color PrimaryClr = Color(0xFF6C63FF);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,9 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
               width: 300, // Set the width of the drawer
               color: Colors.grey[200], // Optional background color for the drawer
               child: Column(
-
                 children: [
-
                   UserAccountsDrawerHeader(
                     accountName: Text("POS",style: Theme.of(context).textTheme.headlineMedium),
                     accountEmail: Text("POINT OF SALE"),
@@ -87,23 +85,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       alignment: WrapAlignment.center,
                       children: [
 
-                        home_cards(title: 'POINT OF SALE', cardImg: 'assets/images/pos.png', OnPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>point_of_sale()));
-                        },),
-                        home_cards(title: 'PRODUCTS', cardImg: 'assets/images/product.png', OnPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductScreen()));
-                        },),
-                        home_cards(title: 'CATEGORY', cardImg: 'assets/images/category.png', OnPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>CategoryScreen()));
-                        },),
-                      ],
-                    ),
-                    Wrap(
-                      alignment: WrapAlignment.center,
-                      children: [
+                        home_cards(title: 'POINT OF SALE', cardImg: 'assets/images/pos.png', OnPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>point_of_sale()));},),
+                        home_cards(title: 'PRODUCTS', cardImg: 'assets/images/product.png', OnPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductScreen()));},),
+                        home_cards(title: 'CATEGORY', cardImg: 'assets/images/category.png', OnPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>CategoryScreen()));},),
+                        home_cards(title: 'Recharge', cardImg: 'assets/images/load.png', OnPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductScreen()));},),
+                        home_cards(title: 'MOBILE PHONES', cardImg: 'assets/images/phone.png', OnPressed: (){}),
                         home_cards(title: 'SALES RECORDS', cardImg: 'assets/images/sales.png', OnPressed: () {  },),
-                        home_cards(title: 'Lab', cardImg: 'assets/images/mobile.png', OnPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>point_of_sale()));
+                        home_cards(title: 'Lab', cardImg: 'assets/images/mobile.png', OnPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>point_of_sale()));
                         },),
                         home_cards(title: 'USERS', cardImg: 'assets/images/man.png', OnPressed: () {  },),
                       ],
@@ -116,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(width: 160,),
-                        SumryCard(title: 'Total Sale', amount: '12000'),
+                          SumryCard(title: 'Total Sale', amount: '12000'),
                           SumryCard(title: 'Product Count', amount: '12000'),
                           SumryCard(title: 'Categories Count', amount: '12000'),
 

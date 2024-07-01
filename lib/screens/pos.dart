@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:point_of_sale/utils/TextField.dart';
 import 'package:point_of_sale/utils/textTheme.dart';
@@ -15,7 +16,7 @@ class point_of_sale extends StatefulWidget {
 }
 
 class _point_of_saleState extends State<point_of_sale> {
-  var PrimaryClr = Color(0xFF6C63FF);
+  var PrimaryClr = const Color(0xFF6C63FF);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +28,7 @@ class _point_of_saleState extends State<point_of_sale> {
         title: Text("POINT OF SALE", style: Theme.of(context).textTheme.headlineLarge),
         actions: [
           StreamBuilder(
-            stream: Stream.periodic(Duration(seconds: 45)),
+            stream:  Stream.periodic(Duration(seconds: 45)),
             builder: (context, snapshot) {
               return Text(
                   "Time  ${DateTime.now().hour}:${DateTime.now().minute} ",
@@ -35,7 +36,7 @@ class _point_of_saleState extends State<point_of_sale> {
               );
             },
           ),
-          SizedBox(width: 30,)
+          const  SizedBox(width: 30,)
         ],
         backgroundColor: PrimaryClr,
       ),
@@ -52,7 +53,7 @@ class _point_of_saleState extends State<point_of_sale> {
 
                   children: [
 
-                    Container(height: 200,width: double.infinity,
+                    SizedBox(height: 200,width: double.infinity,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -63,47 +64,47 @@ class _point_of_saleState extends State<point_of_sale> {
                     ),
                     InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> MyHomePage()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyHomePage()));
                       },
                       child: ListTile(
-                        leading: Icon(Icons.dashboard, color: Colors.white),
+                        leading: const Icon(Icons.dashboard, color: Colors.white),
                         title: Text('DASHBOARD', style: Theme.of(context).textTheme.headlineSmall ),
                       ),
                     ),
                     InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> MyHomePage()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const MyHomePage()));
                       },
                       child: ListTile(
-                        leading: Icon(Icons.shopping_bag, color: Colors.white),
+                        leading:const Icon(Icons.shopping_bag, color: Colors.white),
                         title: Text('PRODUCTS', style: Theme.of(context).textTheme.headlineSmall),
                       ),
                     ),
                     InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> MyHomePage()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const MyHomePage()));
                       },
                       child: ListTile(
-                        leading: Icon(Icons.category, color: Colors.white),
+                        leading:const Icon(Icons.category, color: Colors.white),
                         title: Text('CATEGORY', style: Theme.of(context).textTheme.headlineSmall),
                       ),
                     ),
                     InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> MyHomePage()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const MyHomePage()));
                       },
                       child: ListTile(
-                        leading: Icon(Icons.receipt,color: Colors.white),
+                        leading:const Icon(Icons.receipt,color: Colors.white),
                         title: Text('SALES RECORDS', style: Theme.of(context).textTheme.headlineSmall),
                       ),
                     ),
 
                     InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> MyHomePage()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const MyHomePage()));
                       },
                       child: ListTile(
-                        leading: Icon(Icons.bar_chart, color: Colors.white),
+                        leading:const Icon(Icons.bar_chart, color: Colors.white),
                         title: Text('REPORTS', style: Theme.of(context).textTheme.headlineSmall)),
                     ),
 
@@ -126,12 +127,12 @@ class _point_of_saleState extends State<point_of_sale> {
                 child: Column(
                   children: [
                     Container(
-                      margin: EdgeInsets.all(20),
-                      child: Row(
+                      margin: const EdgeInsets.all(20),
+                      child:  const Row(
 
-                        children: [
+                        children:  [
                           Expanded(
-                              child: CustomTextField(label: 'Product id', isPassword: false,  )
+                              child:   CustomTextField(label: 'Product id', isPassword: false,  )
                           ),
                           SizedBox(width: 10),
                           Expanded(
@@ -157,19 +158,19 @@ class _point_of_saleState extends State<point_of_sale> {
                     Container(
                       decoration: BoxDecoration(
                         color: PrimaryClr,
-                        borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10))
+                        borderRadius:const BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10))
                       ),
-                      margin: EdgeInsets.only(left: 20, right: 20),
+                      margin:const EdgeInsets.only(left: 20, right: 20),
                       height: 300,
                       width: double.infinity,
-                      child: DataTable(
-                        columns: [
+                      child:   DataTable(
+                        columns: const [
                           DataColumn(label: Text('Product ID')),
                           DataColumn(label: Text('Name')),
                           DataColumn(label: Text('QUANTITY')),
                           DataColumn(label: Text('Price')),
                         ],
-                        rows: [
+                        rows: const [
                           DataRow(
                             cells: [
                               DataCell(Text('1')),
@@ -187,7 +188,7 @@ class _point_of_saleState extends State<point_of_sale> {
                             ],
                           ),
                           DataRow(
-                            cells: [
+                            cells:const [
                               DataCell(Text('3')),
                               DataCell(Text('Nike Shoes')),
                               DataCell(Text('3')),
@@ -202,13 +203,13 @@ class _point_of_saleState extends State<point_of_sale> {
                     Container(
                       decoration: BoxDecoration(
                           color: PrimaryClr,
-                        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10))
+                        borderRadius:const BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10))
                       ),
-                      margin: EdgeInsets.only(left: 20,right: 20),
+                      margin: const EdgeInsets.only(left: 20,right: 20),
                       width: double.infinity,
-                      child: Wrap(
+                      child: const Wrap(
                      alignment: WrapAlignment.center,
-                        children: [
+                        children:  [
 
                           SumryCard(title: 'Total Items', amount: '12'),
                           SumryCard(title: 'Subtotal RS:', amount: '100'),
