@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:point_of_sale/utils/TextField.dart';
+import 'package:point_of_sale/utils/drawer.dart';
 import 'package:point_of_sale/utils/textTheme.dart';
 
 import '../utils/Summary_card.dart';
 import '../utils/action_btn.dart';
+import '../utils/listTile.dart';
 import '../utils/todo_card.dart';
 import 'homePage.dart';
 
@@ -43,83 +45,7 @@ class _point_of_saleState extends State<point_of_sale> {
       body:     Row(
 
         children: [
-          Flexible(
-
-            child: Container(
-              width: 300, // Set the width of the drawer
-              color: PrimaryClr, // Optional background color for the drawer
-              child: SingleChildScrollView(
-                child: Column(
-
-                  children: [
-
-                    SizedBox(height: 200,width: double.infinity,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset('assets/images/pos.png',height: 100,),
-                        Text('POS',style: Theme.of(context).textTheme.headlineLarge,)
-                      ],
-                    ),
-                    ),
-                    InkWell(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> const MyHomePage()));
-                      },
-                      child: ListTile(
-                        leading: const Icon(Icons.dashboard, color: Colors.white),
-                        title: Text('DASHBOARD', style: Theme.of(context).textTheme.headlineSmall ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const MyHomePage()));
-                      },
-                      child: ListTile(
-                        leading:const Icon(Icons.shopping_bag, color: Colors.white),
-                        title: Text('PRODUCTS', style: Theme.of(context).textTheme.headlineSmall),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const MyHomePage()));
-                      },
-                      child: ListTile(
-                        leading:const Icon(Icons.category, color: Colors.white),
-                        title: Text('CATEGORY', style: Theme.of(context).textTheme.headlineSmall),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const MyHomePage()));
-                      },
-                      child: ListTile(
-                        leading:const Icon(Icons.receipt,color: Colors.white),
-                        title: Text('SALES RECORDS', style: Theme.of(context).textTheme.headlineSmall),
-                      ),
-                    ),
-
-                    InkWell(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const MyHomePage()));
-                      },
-                      child: ListTile(
-                        leading:const Icon(Icons.bar_chart, color: Colors.white),
-                        title: Text('REPORTS', style: Theme.of(context).textTheme.headlineSmall)),
-                    ),
-
-
-                    Padding(
-                      padding: const EdgeInsets.only(top: 100),
-                      child: Text('POWERED BY AL-BASTIE',style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Colors.deepPurpleAccent),),
-                    )
-
-                    // Add more ListTiles for other drawer items
-                  ],
-                ),
-              ),
-            ),
-          ),
+          DrawerWidget(title: '', imagePath: '',),
           Flexible(
             flex: 4,
             child: SizedBox(

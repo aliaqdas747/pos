@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:point_of_sale/screens/homePage.dart';
+import 'package:point_of_sale/screens/rechargeScreen.dart';
 import 'package:point_of_sale/utils/textTheme.dart';
 
 void main() {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFF6C63FF),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      home: const RechargeScreen(),
     );
   }
 }

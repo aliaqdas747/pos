@@ -112,16 +112,34 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       Container(
                         margin:const EdgeInsets.all(20),
                         child: Row(
+                   mainAxisAlignment: MainAxisAlignment.start,
+                          children:  [
 
-                          children:const [
-                            Expanded(
-                                child: CustomTextField(label: 'Category Id', isPassword: false,  )
-                            ),
-                            SizedBox(width: 10),
 
                             Expanded(
+                              flex: 2,
                                 child: CustomTextField(label: 'Category Name', isPassword: false,  )
                             ),
+                            ElevatedButton(
+                              onPressed: () {
+                                // Handle Discard Sale action
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.teal,
+                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              child:const Text(
+                                "Save New Category",
+                                style: TextStyle(color: Colors.white, fontSize: 16),
+                              ),
+                            ),
+                            SizedBox(width: 20,),
+
+
+
                           ],
                         ),
                         height: 50,
@@ -141,7 +159,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             decoration: InputDecoration(
 
                               suffixIcon: IconButton(onPressed: (){}, icon: Icon(Icons.search,color: primaryClr),),
-                              label: Text("Search here...", style: TextStyle(color: primaryClr,fontSize: 25),),
+                              label: Text("Search here", style: TextStyle(color: primaryClr,fontSize: 25),),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(color: primaryClr, width: 1.0),
                                 borderRadius: BorderRadius.circular(10),
@@ -195,84 +213,17 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           ],
                         ),
                       ),
-                      Container(
-                        width: double.infinity,
-                        margin:const EdgeInsets.only(left: 20, right: 20, bottom: 10),
-                        padding:const EdgeInsets.symmetric(vertical: 10),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Wrap(
-                          alignment: WrapAlignment.spaceEvenly,
-                          children: [
-                            ElevatedButton(
 
-                              onPressed: () {
-                                // Handle Discard Sale action
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.teal,
-                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              child:const Text(
-                                "Save Product",
-                                style: TextStyle(color: Colors.white, fontSize: 16),
-                              ),
-                            ),
-                            // Save for Later Button
-                            ElevatedButton(
-                              onPressed: () {
-                                // Handle Save for Later action
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.blue,
-                                padding:const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              child:const Text(
-                                "UPDATE",
-                                style: TextStyle(color: Colors.white, fontSize: 16),
-                              ),
-                            ),
-
-
-                            // Discard Sale Button
-                            ElevatedButton(
-
-                              onPressed: () {
-                                // Handle Discard Sale action
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.red,
-                                padding:const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              child:const Text(
-                                "DELETE ITEM",
-                                style: TextStyle(color: Colors.white, fontSize: 16),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
 
                       Container(
                         decoration: BoxDecoration(
                             color: primaryClr,
                             borderRadius:const BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10))
                         ),
-                        margin:const EdgeInsets.only(left: 20,right: 20),
+                        margin:const EdgeInsets.only(left: 20,right: 20,top: 5),
                         width: double.infinity,
                         child:const Wrap(
-                          alignment: WrapAlignment.center,
+                          alignment: WrapAlignment.end,
                           children: [
 
                               Expanded(
