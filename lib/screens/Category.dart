@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../utils/Summary_card.dart';
 import '../utils/TextField.dart';
-import 'Product.dart';
-import 'homePage.dart';
+import '../utils/drawer.dart';
+
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({super.key});
@@ -29,80 +29,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ),
         body:     Row(
           children: [
-            Flexible(
-              child: Container(
-                width: 300, // Set the width of the drawer
-                color: primaryClr, // Optional background color for the drawer
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SizedBox(height: 200,width: double.infinity,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset('assets/images/category.png',height: 100,),
-                            Text('Category',style: Theme.of(context).textTheme.headlineLarge,)
-                          ],
-                        ),
-                      ),
-                      InkWell(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const MyHomePage()));
-                        },
-                        child: ListTile(
-                          leading:const Icon(Icons.dashboard, color: Colors.white),
-                          title: Text('DASHBOARD', style: Theme.of(context).textTheme.headlineSmall ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: (){
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const ProductScreen()));
-                        },
-                        child: ListTile(
-                          leading:const Icon(Icons.shopping_bag, color: Colors.white),
-                          title: Text('PRODUCTS', style: Theme.of(context).textTheme.headlineSmall),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const CategoryScreen()));
-                        },
-                        child: ListTile(
-                          leading:const Icon(Icons.category, color: Colors.white),
-                          title: Text('CATEGORY', style: Theme.of(context).textTheme.headlineSmall),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const MyHomePage()));
-                        },
-                        child: ListTile(
-                          leading:const Icon(Icons.receipt,color: Colors.white),
-                          title: Text('SALES RECORDS', style: Theme.of(context).textTheme.headlineSmall),
-                        ),
-                      ),
-
-                      InkWell(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const MyHomePage()));
-                        },
-                        child: ListTile(
-                            leading:const Icon(Icons.bar_chart, color: Colors.white),
-                            title: Text('REPORTS', style: Theme.of(context).textTheme.headlineSmall)),
-                      ),
-
-
-                      Padding(
-                        padding: const EdgeInsets.only(top: 100),
-                        child: Text('POWERED BY AL-BASTIE',style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Colors.deepPurpleAccent),),
-                      )
-
-                      // Add more ListTiles for other drawer items
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            DrawerWidget(title: 'CATEGORIES', imagePath: 'assets/images/category.png',),
             Flexible(
               flex: 4,
               child: SizedBox(
@@ -114,15 +41,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         child: Row(
                    mainAxisAlignment: MainAxisAlignment.start,
                           children:  [
-
-
                             Expanded(
                               flex: 2,
                                 child: CustomTextField(label: 'Category Name', isPassword: false,  )
                             ),
                             ElevatedButton(
                               onPressed: () {
-                                // Handle Discard Sale action
+
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.teal,
@@ -136,10 +61,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                 style: TextStyle(color: Colors.white, fontSize: 16),
                               ),
                             ),
-                            SizedBox(width: 20,),
-
-
-
+                      const SizedBox(width: 20,),
                           ],
                         ),
                         height: 50,

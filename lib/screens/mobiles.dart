@@ -6,14 +6,14 @@ import '../utils/Summary_card.dart';
 import '../utils/TextField.dart';
 import 'homePage.dart';
 
-class ProductScreen extends StatefulWidget {
-  const ProductScreen({super.key});
+class MobileScreen extends StatefulWidget {
+  const MobileScreen({super.key});
 
   @override
-  State<ProductScreen> createState() => _ProductScreenState();
+  State<MobileScreen> createState() => _ProductScreenState();
 }
 
-class _ProductScreenState extends State<ProductScreen> {
+class _ProductScreenState extends State<MobileScreen> {
   final Color primaryClr =const Color(0xFF6C63FF);
   @override
 
@@ -25,38 +25,38 @@ class _ProductScreenState extends State<ProductScreen> {
           shadowColor: Colors.black54,
           elevation: 10.0,
           centerTitle: true,
-          title: Text("POINT OF SALE", style: Theme.of(context).textTheme.headlineLarge),
+          title: Text("Mobiles ", style: Theme.of(context).textTheme.headlineLarge),
           actions:const [
 
-           SizedBox(width: 30,)
+            SizedBox(width: 30,)
           ],
           backgroundColor: primaryClr,
         ),
         body:     Row(
 
           children: [
-            DrawerWidget(title: 'PRODUCTS', imagePath: 'assets/images/product.png',),
+            DrawerWidget(title: 'MOBILE', imagePath: 'assets/images/phone.png',),
             Flexible(
               flex: 4,
               child: SizedBox(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                     Container(
+                      Container(
                         margin: EdgeInsets.all(20),
                         child:const Row(
 
                           children: [
                             Expanded(
-                                child: CustomTextField(label: 'Product id', isPassword: false,  )
+                                child: CustomTextField(label: 'Id', isPassword: false,  )
                             ),
                             SizedBox(width: 10),
                             Expanded(
-                                child: CustomTextField(label: 'Name', isPassword: false,  )
+                                child: CustomTextField(label: 'Model', isPassword: false,  )
                             ),
                             SizedBox(width: 10),
                             Expanded(
-                                child: CustomTextField(label: 'Category', isPassword: false,  )
+                                child: CustomTextField(label: 'Company', isPassword: false,  )
                             ),
                             SizedBox(width: 10),
                             Expanded(
@@ -71,29 +71,29 @@ class _ProductScreenState extends State<ProductScreen> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                     Container(
-                       margin:const EdgeInsets.only(left: 20,right: 20,bottom: 10),
-                       height: 50,width:double.infinity,
-                     child: SizedBox(
-                       width: 100,
-                       child:   TextField(style: TextStyle(color: primaryClr),
+                      Container(
+                        margin:const EdgeInsets.only(left: 20,right: 20,bottom: 10),
+                        height: 50,width:double.infinity,
+                        child: SizedBox(
+                          width: 100,
+                          child:   TextField(style: TextStyle(color: primaryClr),
 
-                         decoration: InputDecoration(
+                            decoration: InputDecoration(
 
-                           suffixIcon: IconButton(onPressed: (){}, icon: Icon(Icons.search,color: primaryClr),),
-                           label: Text("Search here...", style: TextStyle(color: primaryClr,fontSize: 25),),
-                           enabledBorder: OutlineInputBorder(
-                             borderSide: BorderSide(color: primaryClr, width: 1.0),
-                             borderRadius: BorderRadius.circular(10),
-                           ),
-                           focusedBorder: OutlineInputBorder(
-                             borderSide: BorderSide(color: primaryClr, width: 1.0),
-                             borderRadius: BorderRadius.circular(10),
-                           ),
-                         ),
-                       ),
-                     ),
-                     ),
+                              suffixIcon: IconButton(onPressed: (){}, icon: Icon(Icons.search,color: primaryClr),),
+                              label: Text("Search here...", style: TextStyle(color: primaryClr,fontSize: 25),),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: primaryClr, width: 1.0),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: primaryClr, width: 1.0),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                       Container(
                         decoration: BoxDecoration(
                             color: primaryClr,
@@ -104,9 +104,9 @@ class _ProductScreenState extends State<ProductScreen> {
                         width: double.infinity,
                         child: DataTable(
                           columns: const [
-                            DataColumn(label: Text('Product ID')),
-                            DataColumn(label: Text('Name')),
-                            DataColumn(label: Text('CATEGORY')),
+                            DataColumn(label: Text(' ID')),
+                            DataColumn(label: Text('Model')),
+                            DataColumn(label: Text('Company Name')),
                             DataColumn(label: Text('Price')),
                           ],
                           rows:const [

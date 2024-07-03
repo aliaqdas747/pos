@@ -1,13 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:point_of_sale/screens/LabScreen.dart';
+import 'package:point_of_sale/screens/mobiles.dart';
 import 'package:point_of_sale/screens/pos.dart';
+import 'package:point_of_sale/screens/rechargeScreen.dart';
 import 'package:point_of_sale/utils/Summary_card.dart';
 import 'package:point_of_sale/utils/cards.dart';
 import 'package:point_of_sale/utils/todo_card.dart';
 
 import 'Category.dart';
 import 'Product.dart';
+import 'SalesRecord.dart';
 
 class MyHomePage extends StatefulWidget {
 
@@ -88,11 +92,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         home_cards(title: 'POINT OF SALE', cardImg: 'assets/images/pos.png', OnPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>point_of_sale()));},),
                         home_cards(title: 'PRODUCTS', cardImg: 'assets/images/product.png', OnPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductScreen()));},),
                         home_cards(title: 'CATEGORY', cardImg: 'assets/images/category.png', OnPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>CategoryScreen()));},),
-                        home_cards(title: 'Recharge', cardImg: 'assets/images/load.png', OnPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductScreen()));},),
-                        home_cards(title: 'MOBILE PHONES', cardImg: 'assets/images/phone.png', OnPressed: (){}),
-                        home_cards(title: 'SALES RECORDS', cardImg: 'assets/images/sales.png', OnPressed: () {  },),
-                        home_cards(title: 'Lab', cardImg: 'assets/images/mobile.png', OnPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>point_of_sale()));
-                        },),
+                        home_cards(title: 'Recharge', cardImg: 'assets/images/load.png', OnPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>RechargeScreen()));},),
+                        home_cards(title: 'MOBILE PHONES', cardImg: 'assets/images/phone.png', OnPressed: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> MobileScreen()));}),
+                        home_cards(title: 'SALES RECORDS', cardImg: 'assets/images/sales.png', OnPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>SaleRecord()));},),
+                        home_cards(title: 'Lab', cardImg: 'assets/images/mobile.png', OnPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context)=>LabScreen()));},),
                         home_cards(title: 'USERS', cardImg: 'assets/images/man.png', OnPressed: () {  },),
                       ],
                     ),

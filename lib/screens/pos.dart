@@ -2,13 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:point_of_sale/utils/TextField.dart';
 import 'package:point_of_sale/utils/drawer.dart';
-import 'package:point_of_sale/utils/textTheme.dart';
-
 import '../utils/Summary_card.dart';
 import '../utils/action_btn.dart';
-import '../utils/listTile.dart';
-import '../utils/todo_card.dart';
-import 'homePage.dart';
+
 
 class point_of_sale extends StatefulWidget {
   const point_of_sale({super.key});
@@ -45,7 +41,7 @@ class _point_of_saleState extends State<point_of_sale> {
       body:     Row(
 
         children: [
-          DrawerWidget(title: '', imagePath: '',),
+          DrawerWidget(title: 'POS', imagePath: 'assets/images/pos.png',),
           Flexible(
             flex: 4,
             child: SizedBox(

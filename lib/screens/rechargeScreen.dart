@@ -26,6 +26,7 @@ class _RechargeScreenState extends State<RechargeScreen> {
          const  DrawerWidget(title: 'Recharge', imagePath: 'assets/images/load.png',),
           Flexible(
             child: Container(
+
               margin: EdgeInsets.all(20),
               width: 400,
               child: Column(
@@ -103,7 +104,29 @@ class _RechargeScreenState extends State<RechargeScreen> {
                 child: Column(
                   children: [
 
+                    Container(
+                      margin:const EdgeInsets.only(left: 20,right: 20,bottom: 10),
+                      height: 50,width:double.infinity,
+                      child: SizedBox(
+                        width: 100,
+                        child:   TextField(style: TextStyle(color: primaryClr),
 
+                          decoration: InputDecoration(
+
+                            suffixIcon: IconButton(onPressed: (){}, icon: Icon(Icons.search,color: primaryClr),),
+                            label: Text("Search here...", style: TextStyle(color: primaryClr,fontSize: 25),),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: primaryClr, width: 1.0),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: primaryClr, width: 1.0),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                     Container(
                       decoration: BoxDecoration(
                           color: primaryClr,
@@ -114,34 +137,42 @@ class _RechargeScreenState extends State<RechargeScreen> {
                       width: double.infinity,
                       child: DataTable(
                         columns: const [
-                          DataColumn(label: Text('Product ID')),
-                          DataColumn(label: Text('Name')),
-                          DataColumn(label: Text('CATEGORY')),
-                          DataColumn(label: Text('Price')),
+                          DataColumn(label: Text('Recharge Type')),
+                          DataColumn(label: Text('Number / ID')),
+                          DataColumn(label: Text('Operator')),
+                          DataColumn(label: Text('Amount')),
                         ],
                         rows:const [
                           DataRow(
                             cells:  [
-                              DataCell(Text('1')),
-                              DataCell(Text('Apple iPhone')),
-                              DataCell(Text('2')),
+                              DataCell(Text('Mobile')),
+                              DataCell(Text('1039248710324')),
+                              DataCell(Text('Telenor')),
                               DataCell(Text('1200')),
                             ],
                           ),
                           DataRow(
                             cells:  [
-                              DataCell(Text('2')),
-                              DataCell(Text('Samsung TV')),
-                              DataCell(Text('1')),
+                              DataCell(Text('Network')),
+                              DataCell(Text('213412344324')),
+                              DataCell(Text('Zong')),
                               DataCell(Text('800')),
                             ],
                           ),
                           DataRow(
                             cells:  [
-                              DataCell(Text('3')),
-                              DataCell(Text('Nike Shoes')),
-                              DataCell(Text('3')),
+                              DataCell(Text('Mobile')),
+                              DataCell(Text('12341234123')),
+                              DataCell(Text('Jazz')),
                               DataCell(Text('500')),
+                            ],
+                          ),
+                          DataRow(
+                            cells:  [
+                              DataCell(Text('Network')),
+                              DataCell(Text('213412344324')),
+                              DataCell(Text('Zong')),
+                              DataCell(Text('800')),
                             ],
                           ),
                         ],

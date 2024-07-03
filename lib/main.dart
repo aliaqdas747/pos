@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFF6C63FF),
         useMaterial3: true,
       ),
-      home: const RechargeScreen(),
+      home: const MyHomePage(),
     );
   }
 }
