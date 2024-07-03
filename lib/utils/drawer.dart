@@ -8,6 +8,7 @@ import 'package:point_of_sale/screens/mobiles.dart';
 import 'package:point_of_sale/screens/rechargeScreen.dart';
 
 import '../screens/pos.dart';
+import '../screens/users.dart';
 import 'listTile.dart'; // Assuming this is the correct path to your CustomListTile widget
 
 class DrawerWidget extends StatefulWidget {
@@ -71,7 +72,9 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               CustomListTile(icon: Icons.signal_cellular_alt, title: 'RECHARGES/LOADS', onPressed: (){
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> RechargeScreen()));
               }),
-              CustomListTile(icon: Icons.supervised_user_circle, title: 'USERS', onPressed: (){}),
+              CustomListTile(icon: Icons.supervised_user_circle, title: 'USERS', onPressed: (){
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> UserScreen()));
+              }),
               // Add more ListTiles for other drawer items
             ],
           ),

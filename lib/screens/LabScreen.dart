@@ -225,9 +225,9 @@ class _ProductScreenState extends State<LabScreen> {
                           alignment: WrapAlignment.center,
                           children: [
 
-                            SumryCard(title: 'Total Items', amount: '12'),
-                            SumryCard(title: 'Total Category:', amount: '100'),
-                            SumryCard(title: 'Total Product Amount', amount: '1200'),
+                            SumryCard(title: 'Total Devices for repair', amount: '12'),
+                            SumryCard(title: 'Repaired Items:', amount: '100'),
+                           
 
 
 
