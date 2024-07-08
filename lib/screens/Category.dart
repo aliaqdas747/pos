@@ -45,6 +45,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                               flex: 2,
                                 child: CustomTextField(label: 'Category Name', isPassword: false,  )
                             ),
+                            Expanded(
+                                flex: 3,
+                                child: CustomTextField(label: 'Discription', isPassword: false,  )
+                            ),
                             ElevatedButton(
                               onPressed: () {
 
@@ -114,7 +118,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                               cells:  [
 
                                 DataCell(Text('2')),
- 
+
                                 DataCell(Text('1200')),
                               ],
                             ),
@@ -151,7 +155,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                               Expanded(
                                   flex: 10,
                                   child: SumryCard(title: 'Total Categories:', amount: '100')),
-                     
+
 
 
                           ],

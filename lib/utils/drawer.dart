@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:point_of_sale/screens/Category.dart';
 import 'package:point_of_sale/screens/LabScreen.dart';
 import 'package:point_of_sale/screens/Product.dart';
@@ -49,31 +50,31 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 ),
               ),
               CustomListTile(icon: Icons.dashboard, title: 'Dashboard', onPressed: (){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> MyHomePage()));
+                {Get.off(()=> MyHomePage());}
               }),
               CustomListTile(icon: Icons.shopping_cart, title: 'POINT OF SALE', onPressed: (){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> point_of_sale()));
+              Get.off(()=> point_of_sale());
               }),
               CustomListTile(icon: Icons.shopping_bag, title: 'PRODUCTS', onPressed: (){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> ProductScreen()));
+                Get.off(()=> ProductScreen());
               }),
               CustomListTile(icon: Icons.category, title: 'CATEGORY', onPressed: (){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> CategoryScreen()));
+                Get.off(()=> CategoryScreen());
               }),
               CustomListTile(icon: Icons.recent_actors_rounded, title: 'Sale Records', onPressed: (){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> SaleRecord()));
+                Get.off(()=> SaleRecord());
               }),
               CustomListTile(icon: Icons.mobile_friendly, title: 'MOBILES', onPressed: (){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> MobileScreen()));
+                Get.off(()=> MobileScreen());
               }),
               CustomListTile(icon: Icons.science, title: 'Lab', onPressed: (){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> LabScreen()));
+                Get.off(()=> LabScreen());
               }),
               CustomListTile(icon: Icons.signal_cellular_alt, title: 'RECHARGES/LOADS', onPressed: (){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> RechargeScreen()));
+                Get.off(()=> RechargeScreen());
               }),
               CustomListTile(icon: Icons.supervised_user_circle, title: 'USERS', onPressed: (){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> UserScreen()));
+                Get.off(()=> UserScreen());
               }),
               // Add more ListTiles for other drawer items
             ],

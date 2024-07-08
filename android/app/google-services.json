@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "751689288448",
+    "project_id": "amir-pos",
+    "storage_bucket": "amir-pos.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:751689288448:android:42329f9f1ba48d8c3c41e5",
+        "android_client_info": {
+          "package_name": "com.example.point_of_sale"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfEY_ch9m6i2m6tXU9ojW6j19HkMvBddE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
