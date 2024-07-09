@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 
 class CustomTextField extends StatefulWidget {
   final String label;
-
   final bool isPassword;
   final TextEditingController? controller;
-
+  final int? maxlines;
   const CustomTextField({
     Key? key,
-    required this.label, required this.isPassword, this.controller,
+    required this.label, required this.isPassword, this.controller,  this.maxlines,
 
 
   }) : super(key: key);
@@ -22,11 +21,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: TextField(style: TextStyle(color: Colors.white),
-
+      child: TextField(
+      maxLength:widget.maxlines,
+        controller:widget.controller ,
+        style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
-
-
           label: Text(widget.label, style: TextStyle(color: Colors.white,),),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.white, width: 1.0),
