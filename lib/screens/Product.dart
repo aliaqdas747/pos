@@ -1,10 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:point_of_sale/models/product_model.dart';
 import 'package:point_of_sale/screens/Category.dart';
 import 'package:point_of_sale/utils/drawer.dart';
+import 'package:point_of_sale/utils/dropdown_btn.dart';
 import '../utils/Summary_card.dart';
 import '../utils/TextField.dart';
-import 'homePage.dart';
+
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({super.key});
@@ -14,6 +18,8 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
+  final product_model _product_model = product_model();
+
   final Color primaryClr =const Color(0xFF6C63FF);
   @override
 
@@ -27,13 +33,11 @@ class _ProductScreenState extends State<ProductScreen> {
           centerTitle: true,
           title: Text("POINT OF SALE", style: Theme.of(context).textTheme.headlineLarge),
           actions:const [
-
            SizedBox(width: 30,)
           ],
           backgroundColor: primaryClr,
         ),
         body:     Row(
-
           children: [
             DrawerWidget(title: 'PRODUCTS', imagePath: 'assets/images/product.png',),
             Flexible(
@@ -44,23 +48,21 @@ class _ProductScreenState extends State<ProductScreen> {
                     children: [
                      Container(
                         margin: EdgeInsets.all(20),
-                        child:const Row(
-
+                        child: Row(
                           children: [
                             Expanded(
-                                child: CustomTextField(label: 'Product id', isPassword: false,  )
+                                child: CustomTextField(label: 'Product id', isPassword: false,
+                                controller:_product_model.p_id_Controller,),
                             ),
-                            SizedBox(width: 10),
                             Expanded(
-                                child: CustomTextField(label: 'Name', isPassword: false,  )
+                                child: CustomTextField(label: 'Name', isPassword: false,controller: _product_model.P_name_Controller,  )
                             ),
-                            SizedBox(width: 10),
+                            Expanded(child: DecoratedDropdown()),
                             Expanded(
-                                child: CustomTextField(label: 'Category', isPassword: false,  )
+                                child: CustomTextField(label: 'Quantity of Product', isPassword: false,controller: _product_model.P_Quantity,  )
                             ),
-                            SizedBox(width: 10),
                             Expanded(
-                                child: CustomTextField(label: 'Price', isPassword: false,  )
+                                child: CustomTextField(label: 'Price', isPassword: false,controller: _product_model.P_Price,  )
                             ),
                           ],
                         ),
@@ -102,40 +104,32 @@ class _ProductScreenState extends State<ProductScreen> {
                         margin:const EdgeInsets.only(left: 20, right: 20),
                         height: 300,
                         width: double.infinity,
-                        child: DataTable(
-                          columns: const [
-                            DataColumn(label: Text('Product ID')),
-                            DataColumn(label: Text('Name')),
-                            DataColumn(label: Text('CATEGORY')),
-                            DataColumn(label: Text('Price')),
-                          ],
-                          rows:const [
-                            DataRow(
-                              cells:  [
-                                DataCell(Text('1')),
-                                DataCell(Text('Apple iPhone')),
-                                DataCell(Text('2')),
-                                DataCell(Text('1200')),
-                              ],
-                            ),
-                            DataRow(
-                              cells:  [
-                                DataCell(Text('2')),
-                                DataCell(Text('Samsung TV')),
-                                DataCell(Text('1')),
-                                DataCell(Text('800')),
-                              ],
-                            ),
-                            DataRow(
-                              cells:  [
-                                DataCell(Text('3')),
-                                DataCell(Text('Nike Shoes')),
-                                DataCell(Text('3')),
-                                DataCell(Text('500')),
-                              ],
-                            ),
-                          ],
-                        ),
+                        child: StreamBuilder<QuerySnapshot> (
+                          stream: FirebaseFirestore.instance.collection('Products').snapshots(),
+                          builder: (context, snapshot){
+                            if(!snapshot.hasData){
+                              return Center(child: CircularProgressIndicator(),);
+                            }
+                            var Products = snapshot.data!.docs;
+                            return SingleChildScrollView(
+                              physics: BouncingScrollPhysics(),
+                              child:  DataTable(
+                                columns: [
+                                  DataColumn(label: Text('Product ID')),
+                                  DataColumn(label: Text('Product Name')),
+                                  DataColumn(label: Text('Product Quantity')),
+                                  DataColumn(label: Text('Product Price')),
+                                ],
+                                rows: [
+
+                                ],
+                              ),
+                            );
+
+                          }
+
+
+                        )
                       ),
                       Container(
                         width: double.infinity,
@@ -150,9 +144,7 @@ class _ProductScreenState extends State<ProductScreen> {
                           children: [
                             ElevatedButton(
 
-                              onPressed: () {
-                                // Handle Discard Sale action
-                              },
+                             onPressed:()=> _product_model.SaveProduct(context, BuildContext),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.teal,
                                 padding:const  EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -208,22 +200,28 @@ class _ProductScreenState extends State<ProductScreen> {
 
                       Container(
                         decoration: BoxDecoration(
-                            color: primaryClr,
-                            borderRadius:const BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10))
+                          color: primaryClr,
+                          borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
                         ),
-                        margin:const EdgeInsets.only(left: 20,right: 20),
+                        margin: const EdgeInsets.only(left: 20, right: 20, top: 5),
                         width: double.infinity,
-                        child:const  Wrap(
-                          alignment: WrapAlignment.center,
-                          children: [
-
-                            SumryCard(title: 'Total Items', amount: '12'),
-                            SumryCard(title: 'Total Category:', amount: '100'),
-                            SumryCard(title: 'Total Product Amount', amount: '1200'),
-
-
-
-                          ],
+                        child: StreamBuilder<QuerySnapshot>(
+                          stream: FirebaseFirestore.instance.collection('Categories').snapshots(),
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData) {
+                              return Center(child: CircularProgressIndicator());
+                            }
+                            int categoryCount = snapshot.data!.docs.length;
+                            return Wrap(
+                              alignment: WrapAlignment.end,
+                              children: [
+                                Expanded(
+                                  flex: 10,
+                                  child: SumryCard(title: 'Total Categories:', amount: '$categoryCount'),
+                                ),
+                              ],
+                            );
+                          },
                         ),
                       ),
                     ],
