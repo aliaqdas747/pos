@@ -45,37 +45,70 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                       widget.imagePath, // Use widget.imagePath here
                       height: 100, // Set the height of the image
                     ),
-                    Text(widget.title, style: Theme.of(context).textTheme.headlineLarge,),
+                    Text(
+                      widget.title,
+                      style: Theme.of(context).textTheme.headlineLarge,
+                    ),
                   ],
                 ),
               ),
-              CustomListTile(icon: Icons.dashboard, title: 'Dashboard', onPressed: (){
-                {Get.off(()=> MyHomePage());}
-              }),
-              CustomListTile(icon: Icons.shopping_cart, title: 'POINT OF SALE', onPressed: (){
-              Get.off(()=> point_of_sale());
-              }),
-              CustomListTile(icon: Icons.shopping_bag, title: 'PRODUCTS', onPressed: (){
-                Get.off(()=> ProductScreen());
-              }),
-              CustomListTile(icon: Icons.category, title: 'CATEGORY', onPressed: (){
-                Get.off(()=> CategoryScreen());
-              }),
-              CustomListTile(icon: Icons.recent_actors_rounded, title: 'Sale Records', onPressed: (){
-                Get.off(()=> SaleRecord());
-              }),
-              CustomListTile(icon: Icons.mobile_friendly, title: 'MOBILES', onPressed: (){
-                Get.off(()=> MobileScreen());
-              }),
-              CustomListTile(icon: Icons.science, title: 'Lab', onPressed: (){
-                Get.off(()=> LabScreen());
-              }),
-              CustomListTile(icon: Icons.signal_cellular_alt, title: 'RECHARGES/LOADS', onPressed: (){
-                Get.off(()=> RechargeScreen());
-              }),
-              CustomListTile(icon: Icons.supervised_user_circle, title: 'USERS', onPressed: (){
-                Get.off(()=> UserScreen());
-              }),
+              CustomListTile(
+                  icon: Icons.dashboard,
+                  title: 'Dashboard',
+                  onPressed: () {
+                    {
+                      Get.off(() => MyHomePage());
+                    }
+                  }),
+              CustomListTile(
+                  icon: Icons.shopping_cart,
+                  title: 'POINT OF SALE',
+                  onPressed: () {
+                    Get.off(() => point_of_sale());
+                  }),
+
+              CustomListTile(
+                  icon: Icons.shopping_bag,
+                  title: 'PRODUCTS',
+                  onPressed: () {
+                    Get.off(() => ProductScreen());
+                  }),
+              CustomListTile(
+                  icon: Icons.category,
+                  title: 'CATEGORY',
+                  onPressed: () {
+                    Get.off(() => CategoryScreen());
+                  }),
+              CustomListTile(
+                  icon: Icons.recent_actors_rounded,
+                  title: 'Sale Records',
+                  onPressed: () {
+                    Get.off(() => SaleRecord());
+                  }),
+              CustomListTile(
+                  icon: Icons.mobile_friendly,
+                  title: 'MOBILES',
+                  onPressed: () {
+                    Get.off(() => MobileScreen());
+                  }),
+              CustomListTile(
+                  icon: Icons.science,
+                  title: 'Lab',
+                  onPressed: () {
+                    Get.off(() => LabScreen());
+                  }),
+              CustomListTile(
+                  icon: Icons.signal_cellular_alt,
+                  title: 'RECHARGES/LOADS',
+                  onPressed: () {
+                    Get.off(() => RechargeScreen());
+                  }),
+              CustomListTile(
+                  icon: Icons.supervised_user_circle,
+                  title: 'USERS',
+                  onPressed: () {
+                    Get.off(() => UserScreen());
+                  }),
               // Add more ListTiles for other drawer items
             ],
           ),

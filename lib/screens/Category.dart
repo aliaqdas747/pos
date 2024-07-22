@@ -17,10 +17,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
   final CategoryModel _categoryModel = CategoryModel();
   final Color primaryClr = const Color(0xFF6C63FF);
 
-  final Map<String, bool> _editMode = {}; // Track edit mode for each row
-
   Future<void> _deleteCategory(String docId) async {
-    await FirebaseFirestore.instance.collection('Categories').doc(docId).delete();
+    await FirebaseFirestore.instance
+        .collection('Categories')
+        .doc(docId)
+        .delete();
   }
 
   @override
@@ -31,13 +32,15 @@ class _CategoryScreenState extends State<CategoryScreen> {
         shadowColor: Colors.black54,
         elevation: 10.0,
         centerTitle: true,
-        title: Text("POINT OF SALE", style: Theme.of(context).textTheme.headlineLarge),
+        title: Text("POINT OF SALE",
+            style: Theme.of(context).textTheme.headlineLarge),
         actions: const [SizedBox(width: 30)],
         backgroundColor: primaryClr,
       ),
       body: Row(
         children: [
-          DrawerWidget(title: 'CATEGORIES', imagePath: 'assets/images/category.png'),
+          DrawerWidget(
+              title: 'CATEGORIES', imagePath: 'assets/images/category.png'),
           Flexible(
             flex: 4,
             child: SizedBox(
@@ -66,17 +69,20 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             ),
                           ),
                           ElevatedButton(
-                            onPressed: () => _categoryModel.saveCategory(context),
+                            onPressed: () =>
+                                _categoryModel.saveCategory(context),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.greenAccent,
-                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
                             child: const Text(
                               "Save New Category",
-                              style: TextStyle(color: Colors.white, fontSize: 16),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16),
                             ),
                           ),
                           const SizedBox(width: 20),
@@ -90,7 +96,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       ),
                     ),
                     Container(
-                      margin: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                      margin: const EdgeInsets.only(
+                          left: 20, right: 20, bottom: 10),
                       height: 50,
                       width: double.infinity,
                       child: TextField(
@@ -100,28 +107,38 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             onPressed: () {},
                             icon: Icon(Icons.search, color: primaryClr),
                           ),
-                          label: Text("Search here", style: TextStyle(color: primaryClr, fontSize: 25)),
+                          label: Text("Search here",
+                              style:
+                                  TextStyle(color: primaryClr, fontSize: 25)),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: primaryClr, width: 1.0),
+                            borderSide:
+                                BorderSide(color: primaryClr, width: 1.0),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: primaryClr, width: 1.0),
+                            borderSide:
+                                BorderSide(color: primaryClr, width: 1.0),
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
                       ),
                     ),
+
+                    //DataTable
                     Container(
                       decoration: BoxDecoration(
                         color: primaryClr,
-                        borderRadius: const BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10)),
                       ),
                       margin: const EdgeInsets.only(left: 20, right: 20),
                       height: 300,
                       width: double.infinity,
                       child: StreamBuilder<QuerySnapshot>(
-                        stream: FirebaseFirestore.instance.collection('Categories').snapshots(),
+                        stream: FirebaseFirestore.instance
+                            .collection('Categories')
+                            .snapshots(),
                         builder: (context, snapshot) {
                           if (!snapshot.hasData) {
                             return Center(child: CircularProgressIndicator());
@@ -142,53 +159,19 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                 return DataRow(
                                   cells: [
                                     DataCell(
-                                      _editMode[docId] == true
-                                          ? EditableText(
-                                        controller: TextEditingController(text: data['Category']),
-                                        focusNode: FocusNode(),
-                                        style: TextStyle(color: Colors.black),
-                                        cursorColor: primaryClr,
-                                        backgroundCursorColor: primaryClr,
-                                        onSubmitted: (value) {
-                                          // Update the category name in Firestore
-                                          FirebaseFirestore.instance
-                                              .collection('Categories')
-                                              .doc(docId)
-                                              .update({'Category': value});
-                                          setState(() {
-                                            _editMode[docId] = false;
-                                          });
-                                        },
-                                      )
-                                          : Text(data['Category'] ?? ''),
+                                      Text(data['Category'] ?? ''),
                                     ),
                                     DataCell(
-                                      _editMode[docId] == true
-                                          ? EditableText(
-                                        controller: TextEditingController(text: data['details']),
-                                        focusNode: FocusNode(),
-                                        style: TextStyle(color: Colors.black),
-                                        cursorColor: primaryClr,
-                                        backgroundCursorColor: primaryClr,
-                                        onSubmitted: (value) {
-                                          // Update the description in Firestore
-                                          FirebaseFirestore.instance
-                                              .collection('Categories')
-                                              .doc(docId)
-                                              .update({'details': value});
-                                          setState(() {
-                                            _editMode[docId] = false;
-                                          });
-                                        },
-                                      )
-                                          : Text(data['details'] ?? ''),
+                                      Text(data['details'] ?? ''),
                                     ),
                                     DataCell(
                                       Row(
                                         children: [
-
                                           IconButton(
-                                            icon: Icon(Icons.delete,color: Colors.limeAccent,),
+                                            icon: Icon(
+                                              Icons.delete,
+                                              color: Colors.limeAccent,
+                                            ),
                                             onPressed: () async {
                                               await _deleteCategory(docId);
                                             },
@@ -204,15 +187,22 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         },
                       ),
                     ),
+
+                    //Total Category Item
                     Container(
                       decoration: BoxDecoration(
                         color: primaryClr,
-                        borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+                        borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10)),
                       ),
-                      margin: const EdgeInsets.only(left: 20, right: 20, top: 5),
+                      margin:
+                          const EdgeInsets.only(left: 20, right: 20, top: 5),
                       width: double.infinity,
                       child: StreamBuilder<QuerySnapshot>(
-                        stream: FirebaseFirestore.instance.collection('Categories').snapshots(),
+                        stream: FirebaseFirestore.instance
+                            .collection('Categories')
+                            .snapshots(),
                         builder: (context, snapshot) {
                           if (!snapshot.hasData) {
                             return Center(child: CircularProgressIndicator());
@@ -223,7 +213,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             children: [
                               Expanded(
                                 flex: 10,
-                                child: SumryCard(title: 'Total Categories:', amount: '$categoryCount'),
+                                child: SumryCard(
+                                    title: 'Total Categories:',
+                                    amount: '$categoryCount'),
                               ),
                             ],
                           );

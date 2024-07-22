@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class home_cards extends StatefulWidget {
   final String title;
   final String cardImg;
- final VoidCallback OnPressed;
+  final VoidCallback OnPressed;
 
-   home_cards({
+  home_cards({
     super.key,
     required this.title,
     required this.cardImg,
-     required this.OnPressed,
+    required this.OnPressed,
   });
 
   @override
@@ -27,15 +27,17 @@ class _HomeCardsState extends State<home_cards> {
       child: GestureDetector(
         onTap: widget.OnPressed,
         child: Container(
-          margin: EdgeInsets.all(20),
+          margin: EdgeInsets.all(15),
           decoration: BoxDecoration(
             color: Color(0xFF6C63FF),
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
                 blurRadius: 10,
                 spreadRadius: 2.5,
-                color: _isHovering ? Colors.blue : Colors.black54, // Change color based on hover state
+                color: _isHovering
+                    ? Colors.blue
+                    : Colors.black54, // Change color based on hover state
               ),
             ],
           ),

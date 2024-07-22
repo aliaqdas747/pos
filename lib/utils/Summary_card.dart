@@ -35,19 +35,19 @@ class _SumryCardState extends State<SumryCard> {
           Text(
             widget.title,
             style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-              color: Colors.deepPurpleAccent,
-              fontSize: 18, // Increased font size
-              fontWeight: FontWeight.bold,
-            ),
+                  color: Colors.deepPurpleAccent,
+                  fontSize: 18, // Increased font size
+                  fontWeight: FontWeight.bold,
+                ),
           ),
           SizedBox(height: 10), // Added space between title and amount
           Text(
             widget.amount,
             style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-              color: Colors.black,
-              fontSize: 22, // Increased font size
-              fontWeight: FontWeight.bold,
-            ),
+                  color: Colors.black,
+                  fontSize: 22, // Increased font size
+                  fontWeight: FontWeight.bold,
+                ),
           ),
         ],
       ),

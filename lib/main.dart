@@ -4,11 +4,9 @@ import 'package:get/get.dart';
 import 'package:point_of_sale/screens/homePage.dart';
 import 'package:point_of_sale/utils/textTheme.dart';
 import 'firebase_options.dart';
+import 'dart:html'; // This is for web applications.
 
-
-void main()async {
-
-
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -23,9 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-
-      debugShowCheckedModeBanner: false,
-
+      debugShowCheckedModeBanner: true,
       theme: ThemeData(
         textTheme: TTextTheme.lightTextTheme,
         primaryColor: const Color(0xFF6C63FF),

@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:point_of_sale/screens/Category.dart';
+
 import 'package:point_of_sale/utils/drawer.dart';
 import '../utils/Summary_card.dart';
 import '../utils/TextField.dart';
-import 'homePage.dart';
 
 class UserScreen extends StatefulWidget {
   const UserScreen({super.key});
@@ -24,15 +23,21 @@ class _UserScreenState extends State<UserScreen> {
         shadowColor: Colors.black54,
         elevation: 10.0,
         centerTitle: true,
-        title: Text("User Management", style: Theme.of(context).textTheme.headlineLarge),
+        title: Text("User Management",
+            style: Theme.of(context).textTheme.headlineLarge),
         actions: const [
-          SizedBox(width: 30,)
+          SizedBox(
+            width: 30,
+          )
         ],
         backgroundColor: primaryClr,
       ),
       body: Row(
         children: [
-          DrawerWidget(title: 'Users', imagePath: 'assets/images/man.png',),
+          DrawerWidget(
+            title: 'Users',
+            imagePath: 'assets/images/man.png',
+          ),
           Flexible(
             flex: 4,
             child: SizedBox(
@@ -45,21 +50,25 @@ class _UserScreenState extends State<UserScreen> {
                         children: [
                           Expanded(
                               child: CustomTextField(
-                                label: 'Username', isPassword: false,)
-                          ),
+                            label: 'Username',
+                            isPassword: false,
+                          )),
                           Expanded(
                               child: CustomTextField(
-                                label: 'Email', isPassword: false,)
-                          ),
+                            label: 'Email',
+                            isPassword: false,
+                          )),
                           SizedBox(width: 10),
                           Expanded(
                               child: CustomTextField(
-                                label: 'Role', isPassword: false,)
-                          ),
+                            label: 'Role',
+                            isPassword: false,
+                          )),
                           Expanded(
                               child: CustomTextField(
-                                label: 'Password', isPassword: true,)
-                          ),
+                            label: 'Password',
+                            isPassword: true,
+                          )),
                         ],
                       ),
                       height: 50,
@@ -70,8 +79,10 @@ class _UserScreenState extends State<UserScreen> {
                       ),
                     ),
                     Container(
-                      margin: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
-                      height: 50, width: double.infinity,
+                      margin: const EdgeInsets.only(
+                          left: 20, right: 20, bottom: 10),
+                      height: 50,
+                      width: double.infinity,
                       child: SizedBox(
                         width: 100,
                         child: TextField(
@@ -81,13 +92,17 @@ class _UserScreenState extends State<UserScreen> {
                               onPressed: () {},
                               icon: Icon(Icons.search, color: primaryClr),
                             ),
-                            label: Text("Search here...", style: TextStyle(color: primaryClr, fontSize: 25)),
+                            label: Text("Search here...",
+                                style:
+                                    TextStyle(color: primaryClr, fontSize: 25)),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: primaryClr, width: 1.0),
+                              borderSide:
+                                  BorderSide(color: primaryClr, width: 1.0),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: primaryClr, width: 1.0),
+                              borderSide:
+                                  BorderSide(color: primaryClr, width: 1.0),
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
@@ -97,7 +112,9 @@ class _UserScreenState extends State<UserScreen> {
                     Container(
                       decoration: BoxDecoration(
                         color: primaryClr,
-                        borderRadius: const BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10)),
                       ),
                       margin: const EdgeInsets.only(left: 20, right: 20),
                       height: 300,
@@ -135,7 +152,8 @@ class _UserScreenState extends State<UserScreen> {
                     ),
                     Container(
                       width: double.infinity,
-                      margin: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                      margin: const EdgeInsets.only(
+                          left: 20, right: 20, bottom: 10),
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       decoration: BoxDecoration(
                         color: Colors.grey[300],
@@ -150,14 +168,16 @@ class _UserScreenState extends State<UserScreen> {
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.teal,
-                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
                             child: const Text(
                               "Save User",
-                              style: TextStyle(color: Colors.white, fontSize: 16),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16),
                             ),
                           ),
                           // Update Button
@@ -167,14 +187,16 @@ class _UserScreenState extends State<UserScreen> {
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blue,
-                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
                             child: const Text(
                               "Update User",
-                              style: TextStyle(color: Colors.white, fontSize: 16),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16),
                             ),
                           ),
                           // Delete User Button
@@ -184,14 +206,16 @@ class _UserScreenState extends State<UserScreen> {
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.red,
-                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
                             child: const Text(
                               "Delete User",
-                              style: TextStyle(color: Colors.white, fontSize: 16),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16),
                             ),
                           ),
                         ],
@@ -200,7 +224,9 @@ class _UserScreenState extends State<UserScreen> {
                     Container(
                       decoration: BoxDecoration(
                         color: primaryClr,
-                        borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+                        borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10)),
                       ),
                       margin: const EdgeInsets.only(left: 20, right: 20),
                       width: double.infinity,
