@@ -1,46 +1,36 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:hive/hive.dart';
+import 'package:point_of_sale/models/sales_Model.dart';
+import 'package:point_of_sale/utils/Quantity_custom.dart';
 import 'package:point_of_sale/utils/TextField.dart';
 import 'package:point_of_sale/utils/drawer.dart';
-import '../utils/Summary_card.dart';
-import '../utils/action_btn.dart';
+import 'package:provider/provider.dart';
 
 class point_of_sale extends StatefulWidget {
-  const point_of_sale({super.key});
+  point_of_sale({super.key});
 
   @override
   State<point_of_sale> createState() => _point_of_saleState();
 }
 
 class _point_of_saleState extends State<point_of_sale> {
-  var PrimaryClr = const Color(0xFF6C63FF);
+  Future<void> _deleteProduct(String docId) async {
+    await FirebaseFirestore.instance.collection('Cart').doc(docId).delete();
+  }
+
+  ///Now its good ?
+  var PrimaryClr = Color(0xFF6C63FF);
   DateTime _selectedDate = DateTime.now();
   TimeOfDay _selectedTime = TimeOfDay(hour: 12, minute: 0);
 
   @override
   Widget build(BuildContext context) {
+    final saleModel = Provider.of<SaleModel>(context);
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        shadowColor: Colors.black54,
-        elevation: 10.0,
-        centerTitle: true,
-        title: Text("POINT OF SALE",
-            style: Theme.of(context).textTheme.headlineLarge),
-        actions: [
-          StreamBuilder(
-            stream: Stream.periodic(Duration(seconds: 45)),
-            builder: (context, snapshot) {
-              return Text(
-                "Time  ${DateTime.now().hour}:${DateTime.now().minute} ",
-                style: Theme.of(context).textTheme.headlineMedium,
-              );
-            },
-          ),
-          const SizedBox(width: 30),
-        ],
-        backgroundColor: PrimaryClr,
-      ),
       body: Row(
         children: [
           DrawerWidget(
@@ -54,43 +44,19 @@ class _point_of_saleState extends State<point_of_sale> {
                 child: Column(
                   children: [
                     Container(
-                      margin: const EdgeInsets.all(20),
+                      margin: const EdgeInsets.all(10),
+                      width: double.infinity,
+                      height: 300,
+                      decoration: BoxDecoration(
+                        color: PrimaryClr,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Row(
-                            children: [
-                              Expanded(
-                                child: CustomTextField(
-                                  label: 'Product id',
-                                  isPassword: false,
-                                ),
-                              ),
-                              SizedBox(width: 10),
-                              Expanded(
-                                child: CustomTextField(
-                                  label: 'Name',
-                                  isPassword: false,
-                                ),
-                              ),
-                              SizedBox(width: 10),
-                              Expanded(
-                                child: CustomTextField(
-                                  label: 'QUANTITY',
-                                  isPassword: false,
-                                ),
-                              ),
-                              SizedBox(width: 10),
-                              Expanded(
-                                child: CustomTextField(
-                                  label: 'Price',
-                                  isPassword: false,
-                                ),
-                              ),
-                            ],
-                          ),
                           Container(
                             margin: EdgeInsets.only(
-                                left: 25, right: 25, bottom: 10, top: 10),
+                                left: 25, right: 25, bottom: 10, top: 5),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
@@ -145,14 +111,101 @@ class _point_of_saleState extends State<point_of_sale> {
                               ],
                             ),
                           ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: CustomTextField(
+                                  label: 'Product id',
+                                  onChanged: (value) {
+                                    saleModel.fetchNamebyId(context, value);
+                                  },
+                                  isPassword: false,
+                                  controller: saleModel.idController,
+                                ),
+                              ),
+                              SizedBox(width: 10),
+                              Expanded(
+                                child: DropdownSearchbar(
+                                  nameController: saleModel.nameController,
+                                  saleModel: saleModel,
+                                ),
+                              ),
+                              SizedBox(width: 10),
+                              Expanded(
+                                child: CustomTextField(
+                                  controller: saleModel.quantityController,
+                                  label: 'QUANTITY',
+                                  isPassword: false,
+                                ),
+                              ),
+                              SizedBox(width: 10),
+                              Expanded(
+                                child: CustomTextField(
+                                  controller: saleModel.priceController,
+                                  label: 'Price',
+                                  isPassword: false,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Expanded(child: SizedBox()),
+                          Container(
+                            color: Colors.grey.shade100,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Product_Quantity(),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    // Save for Later Button
+                                    CategoryQuantity(),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    ElevatedButton.icon(
+                                      onPressed: () async {
+                                        await saleModel.AddCart(
+                                          context,
+                                        );
+                                      },
+                                      icon: Icon(
+                                        Icons.shopping_cart_checkout,
+                                        color: PrimaryClr,
+                                      ),
+                                      label: Text("ADD to Cart"),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    //Button for final bill
+                                    ElevatedButton.icon(
+                                      onPressed: () async {
+                                        await saleModel.AddCart(
+                                          context,
+                                        );
+                                      },
+                                      icon: Icon(
+                                        Icons.receipt,
+                                        color: PrimaryClr,
+                                      ),
+                                      label: Text("Finalize"),
+                                    )
+                                  ],
+                                )
+                                //Button for add to cart
+                              ],
+                            ),
+                          )
                         ],
                       ),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: PrimaryClr,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
                     ),
+
+                    //Table coooooooooooooooooooode
                     Container(
                       decoration: BoxDecoration(
                         color: PrimaryClr,
@@ -160,65 +213,54 @@ class _point_of_saleState extends State<point_of_sale> {
                             topLeft: Radius.circular(10),
                             topRight: Radius.circular(10)),
                       ),
-                      margin: const EdgeInsets.only(left: 20, right: 20),
+                      margin: const EdgeInsets.only(left: 10, right: 10),
                       height: 300,
                       width: double.infinity,
-                      child: DataTable(
-                        columns: const [
-                          DataColumn(label: Text('Product ID')),
-                          DataColumn(label: Text('Name')),
-                          DataColumn(label: Text('QUANTITY')),
-                          DataColumn(label: Text('Price')),
-                        ],
-                        rows: const [
-                          DataRow(
-                            cells: [
-                              DataCell(Text('1')),
-                              DataCell(Text('Apple iPhone')),
-                              DataCell(Text('2')),
-                              DataCell(Text('1200')),
-                            ],
-                          ),
-                          DataRow(
-                            cells: [
-                              DataCell(Text('2')),
-                              DataCell(Text('Samsung TV')),
-                              DataCell(Text('1')),
-                              DataCell(Text('800')),
-                            ],
-                          ),
-                          DataRow(
-                            cells: const [
-                              DataCell(Text('3')),
-                              DataCell(Text('Nike Shoes')),
-                              DataCell(Text('3')),
-                              DataCell(Text('500')),
-                            ],
-                          ),
-                        ],
+                      child: StreamBuilder<QuerySnapshot>(
+                        stream: FirebaseFirestore.instance
+                            .collection('Cart')
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData) {
+                            return Center(child: CircularProgressIndicator());
+                          }
+                          var CartProducts = snapshot.data!.docs;
+                          return SingleChildScrollView(
+                              physics: BouncingScrollPhysics(),
+                              child: DataTable(
+                                  columns: [
+                                    DataColumn(label: Text("Product Id")),
+                                    DataColumn(label: Text("Name")),
+                                    DataColumn(label: Text("Quantity")),
+                                    DataColumn(label: Text("Price")),
+                                    DataColumn(label: Text("Action")),
+                                  ],
+                                  rows: CartProducts.map((doc) {
+                                    var data =
+                                        doc.data() as Map<String, dynamic>;
+                                    String docId = doc.id;
+                                    return DataRow(cells: [
+                                      DataCell(Text(data['Id'] ?? '')),
+                                      DataCell(Text(data['Name'])),
+                                      DataCell(Text(data['Quantity'])),
+                                      DataCell(Text(data['Price'])),
+                                      DataCell(Tooltip(
+                                        message: 'Delete from table',
+                                        child: IconButton(
+                                          icon: Icon(
+                                            Icons.delete,
+                                            color: Colors.white,
+                                          ),
+                                          onPressed: () {
+                                            _deleteProduct(docId);
+                                          },
+                                        ),
+                                      )),
+                                    ]);
+                                  }).toList()));
+                        },
                       ),
-                    ),
-                    ActionButtonsRow(),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: PrimaryClr,
-                        borderRadius: const BorderRadius.only(
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10)),
-                      ),
-                      margin: const EdgeInsets.only(left: 20, right: 20),
-                      width: double.infinity,
-                      child: const Wrap(
-                        alignment: WrapAlignment.center,
-                        children: [
-                          SumryCard(title: 'Total Items', amount: '12'),
-                          SumryCard(title: 'Subtotal RS:', amount: '100'),
-                          SumryCard(title: 'Total Amount', amount: '1200'),
-                          SumryCard(title: 'Amount Paid:', amount: '1200'),
-                          SumryCard(title: 'Change to return:', amount: '0'),
-                        ],
-                      ),
-                    ),
+                    )
                   ],
                 ),
               ),
@@ -229,3 +271,5 @@ class _point_of_saleState extends State<point_of_sale> {
     );
   }
 }
+/*  builder: (context, snapshot) {
+                              if (!snapshot.hasData) {*/

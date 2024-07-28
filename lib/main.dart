@@ -1,17 +1,28 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:point_of_sale/models/sales_Model.dart';
+
 import 'package:point_of_sale/screens/homePage.dart';
 import 'package:point_of_sale/utils/textTheme.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
-import 'dart:html'; // This is for web applications.
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => SaleModel()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

@@ -41,8 +41,19 @@ dependencies:
 
   get: ^4.6.6
   cloud_firestore: ^5.0.2
+  dropdownfield2: ^1.0.7
+  hive_flutter: ^1.1.0
+  hive: ^2.2.3
+  path_provider: ^2.1.3
+  build_runner: ^2.4.9
+  build_runner_core: ^7.3.0
+  provider: ^6.1.2
+  
 
 dev_dependencies:
+  hive_generator: ^2.0.1
+
+
   flutter_test:
     sdk: flutter
 

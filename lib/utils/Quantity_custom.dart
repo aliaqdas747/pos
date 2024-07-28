@@ -62,7 +62,7 @@ class _Product_QuantityState extends State<Product_Quantity> {
           return Row(
             children: [
               Text(
-                'Total Products:  ',
+                'Stock Products:  ',
                 style: TextStyle(
                     color: Colors.black, fontSize: 20, fontFamily: 'Schyler'),
               ),
