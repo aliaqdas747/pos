@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:point_of_sale/themes_Colors.dart';
 
 class home_cards extends StatefulWidget {
   final String title;
@@ -29,14 +30,14 @@ class _HomeCardsState extends State<home_cards> {
         child: Container(
           margin: EdgeInsets.all(15),
           decoration: BoxDecoration(
-            color: Color(0xFF6C63FF),
+            color: AppColors.primary,
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
                 blurRadius: 10,
                 spreadRadius: 2.5,
                 color: _isHovering
-                    ? Colors.blue
+                    ? AppColors.secondary
                     : Colors.black54, // Change color based on hover state
               ),
             ],

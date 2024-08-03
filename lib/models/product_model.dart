@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:point_of_sale/themes_Colors.dart';
 
 class ProductModel with ChangeNotifier {
   TextEditingController pIdController = TextEditingController();
@@ -14,13 +15,13 @@ class ProductModel with ChangeNotifier {
     String productId = pIdController.text.trim();
     String productName = pNameController.text.trim();
     String productQuantity = pQuantityController.text.trim();
-    String productPrice = pPriceController.text.trim();
+    int productPrice = int.parse(pPriceController.text.trim());
     String? value = _selectedCategory;
 
     if (productId.isNotEmpty &&
         productName.isNotEmpty &&
         productQuantity.isNotEmpty &&
-        productPrice.isNotEmpty &&
+        productPrice != null &&
         value != null) {
       DocumentSnapshot productDoc = await FirebaseFirestore.instance
           .collection('Products')
@@ -123,7 +124,6 @@ class DecoratedDropdown extends StatefulWidget {
 }
 
 class _DecoratedDropdownState extends State<DecoratedDropdown> {
-  final Color primaryClr = const Color(0xFF6C63FF);
   // List for category names
   List<String> categoryNames = [];
   String? _selectedValue;
@@ -151,9 +151,9 @@ class _DecoratedDropdownState extends State<DecoratedDropdown> {
       height: 40,
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: primaryClr,
+        color: AppColors.primary,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.lime, width: 1),
+        border: Border.all(color: AppColors.secondary, width: 1),
         boxShadow: [
           BoxShadow(
             color: Colors.black26,

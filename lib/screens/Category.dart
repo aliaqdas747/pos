@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:point_of_sale/themes_Colors.dart';
 import 'package:point_of_sale/utils/Summary_card.dart';
 import '../utils/TextField.dart';
 import '../utils/drawer.dart';
@@ -15,7 +16,6 @@ class CategoryScreen extends StatefulWidget {
 
 class _CategoryScreenState extends State<CategoryScreen> {
   final CategoryModel _categoryModel = CategoryModel();
-  final Color primaryClr = const Color(0xFF6C63FF);
 
   Future<void> _deleteCategory(String docId) async {
     await FirebaseFirestore.instance
@@ -35,7 +35,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         title: Text("POINT OF SALE",
             style: Theme.of(context).textTheme.headlineLarge),
         actions: const [SizedBox(width: 30)],
-        backgroundColor: primaryClr,
+        backgroundColor: AppColors.primary,
       ),
       body: Row(
         children: [
@@ -72,7 +72,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             onPressed: () =>
                                 _categoryModel.saveCategory(context),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.greenAccent,
+                              backgroundColor: AppColors.secondary,
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 10),
                               shape: RoundedRectangleBorder(
@@ -91,7 +91,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       height: 50,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: primaryClr,
+                        color: AppColors.primary,
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
@@ -101,23 +101,28 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       height: 50,
                       width: double.infinity,
                       child: TextField(
-                        style: TextStyle(color: primaryClr),
+                        style: TextStyle(
+                          color: AppColors.primary,
+                        ),
                         decoration: InputDecoration(
                           suffixIcon: IconButton(
                             onPressed: () {},
-                            icon: Icon(Icons.search, color: primaryClr),
+                            icon: Icon(
+                              Icons.search,
+                              color: AppColors.primary,
+                            ),
                           ),
                           label: Text("Search here",
-                              style:
-                                  TextStyle(color: primaryClr, fontSize: 25)),
+                              style: TextStyle(
+                                  color: AppColors.primary, fontSize: 25)),
                           enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: primaryClr, width: 1.0),
+                            borderSide: BorderSide(
+                                color: AppColors.primary, width: 1.0),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: primaryClr, width: 1.0),
+                            borderSide: BorderSide(
+                                color: AppColors.primary, width: 1.0),
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
@@ -127,7 +132,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     //DataTable
                     Container(
                       decoration: BoxDecoration(
-                        color: primaryClr,
+                        color: AppColors.primary,
                         borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(10),
                             topRight: Radius.circular(10)),
@@ -191,7 +196,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     //Total Category Item
                     Container(
                       decoration: BoxDecoration(
-                        color: primaryClr,
+                        color: AppColors.primary,
                         borderRadius: const BorderRadius.only(
                             bottomLeft: Radius.circular(10),
                             bottomRight: Radius.circular(10)),

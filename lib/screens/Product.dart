@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:point_of_sale/models/product_model.dart';
 import 'package:point_of_sale/screens/SalesRecord.dart';
+import 'package:point_of_sale/themes_Colors.dart';
 import 'package:point_of_sale/utils/drawer.dart';
 import 'package:point_of_sale/utils/searchbar.dart';
 import '../utils/Summary_card.dart';
@@ -23,7 +24,6 @@ class _ProductScreenState extends State<ProductScreen> {
     await FirebaseFirestore.instance.collection('Products').doc(docId).delete();
   }
 
-  final Color primaryClr = const Color(0xFF6C63FF);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +39,7 @@ class _ProductScreenState extends State<ProductScreen> {
               width: 30,
             )
           ],
-          backgroundColor: primaryClr,
+          backgroundColor: AppColors.primary,
         ),
         body: Row(
           children: [
@@ -90,7 +90,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         height: 50,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: primaryClr,
+                          color: AppColors.primary,
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
@@ -101,7 +101,7 @@ class _ProductScreenState extends State<ProductScreen> {
                       //DataTable  to show the data in the form of table
                       Container(
                         decoration: BoxDecoration(
-                          color: primaryClr,
+                          color: AppColors.primary,
                           borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(10),
                               topRight: Radius.circular(10)),
@@ -144,7 +144,8 @@ class _ProductScreenState extends State<ProductScreen> {
                                           Text(data['Name'] ?? ''),
                                         ),
                                         DataCell(Text(data['Category'] ?? '')),
-                                        DataCell(Text(data['Price'] ?? '')),
+                                        DataCell(Text(
+                                            data['Price'].toString() ?? '')),
                                         DataCell(Text(data['Quantity'] ?? '')),
                                         DataCell(Row(
                                           children: [
@@ -170,7 +171,7 @@ class _ProductScreenState extends State<ProductScreen> {
                             left: 20, right: 20, bottom: 10),
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         decoration: BoxDecoration(
-                          color: Colors.grey[400],
+                          color: AppColors.secondary,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Row(
@@ -180,7 +181,7 @@ class _ProductScreenState extends State<ProductScreen> {
                               onPressed: () =>
                                   _product_model.saveProduct(context, context),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.teal,
+                                backgroundColor: AppColors.primary,
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 20, vertical: 10),
                                 shape: RoundedRectangleBorder(

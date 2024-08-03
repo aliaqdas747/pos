@@ -7,6 +7,7 @@ import 'package:point_of_sale/screens/SalesRecord.dart';
 import 'package:point_of_sale/screens/homePage.dart';
 import 'package:point_of_sale/screens/mobiles.dart';
 import 'package:point_of_sale/screens/rechargeScreen.dart';
+import 'package:point_of_sale/themes_Colors.dart';
 
 import '../screens/pos.dart';
 import '../screens/users.dart';
@@ -23,15 +24,13 @@ class DrawerWidget extends StatefulWidget {
 }
 
 class _DrawerWidgetState extends State<DrawerWidget> {
-  var PrimaryClr = const Color(0xFF6C63FF);
-
   @override
   Widget build(BuildContext context) {
     return Flexible(
       child: Container(
         width: 300, // Set the width of the drawer
         height: double.infinity,
-        color: PrimaryClr, // Optional background color for the drawer
+        color: AppColors.primary, // Optional background color for the drawer
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -64,7 +63,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   icon: Icons.shopping_cart,
                   title: 'POINT OF SALE',
                   onPressed: () {
-                    Get.off(() => point_of_sale());
+                    Get.off(() => PointOfSale());
                   }),
 
               CustomListTile(
@@ -83,7 +82,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   icon: Icons.recent_actors_rounded,
                   title: 'Sale Records',
                   onPressed: () {
-                    Get.off(() => SaleRecord());
+                    Get.off(() => SalesRecordPage());
                   }),
               CustomListTile(
                   icon: Icons.mobile_friendly,

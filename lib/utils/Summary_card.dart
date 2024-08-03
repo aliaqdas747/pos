@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:point_of_sale/themes_Colors.dart';
 
 class SumryCard extends StatefulWidget {
   final String title;
@@ -17,7 +18,7 @@ class _SumryCardState extends State<SumryCard> {
       margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
+        color: AppColors.secondary,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -35,7 +36,7 @@ class _SumryCardState extends State<SumryCard> {
           Text(
             widget.title,
             style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                  color: Colors.deepPurpleAccent,
+                  color: AppColors.primary,
                   fontSize: 18, // Increased font size
                   fontWeight: FontWeight.bold,
                 ),

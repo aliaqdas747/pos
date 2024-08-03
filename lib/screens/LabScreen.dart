@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:point_of_sale/themes_Colors.dart';
 
 import 'package:point_of_sale/utils/drawer.dart';
 import '../utils/Summary_card.dart';
@@ -13,7 +14,6 @@ class LabScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<LabScreen> {
-  final Color primaryClr = const Color(0xFF6C63FF);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +28,7 @@ class _ProductScreenState extends State<LabScreen> {
               width: 30,
             )
           ],
-          backgroundColor: primaryClr,
+          backgroundColor: AppColors.primary,
         ),
         body: Row(
           children: [
@@ -77,7 +77,7 @@ class _ProductScreenState extends State<LabScreen> {
                         height: 50,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: primaryClr,
+                          color: AppColors.primary,
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
@@ -89,25 +89,30 @@ class _ProductScreenState extends State<LabScreen> {
                         child: SizedBox(
                           width: 100,
                           child: TextField(
-                            style: TextStyle(color: primaryClr),
+                            style: TextStyle(
+                              color: AppColors.primary,
+                            ),
                             decoration: InputDecoration(
                               suffixIcon: IconButton(
                                 onPressed: () {},
-                                icon: Icon(Icons.search, color: primaryClr),
+                                icon: Icon(
+                                  Icons.search,
+                                  color: AppColors.primary,
+                                ),
                               ),
                               label: Text(
                                 "Search here...",
-                                style:
-                                    TextStyle(color: primaryClr, fontSize: 25),
+                                style: TextStyle(
+                                    color: AppColors.primary, fontSize: 25),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: primaryClr, width: 1.0),
+                                borderSide: BorderSide(
+                                    color: AppColors.primary, width: 1.0),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: primaryClr, width: 1.0),
+                                borderSide: BorderSide(
+                                    color: AppColors.primary, width: 1.0),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
@@ -116,7 +121,7 @@ class _ProductScreenState extends State<LabScreen> {
                       ),
                       Container(
                         decoration: BoxDecoration(
-                            color: primaryClr,
+                            color: AppColors.primary,
                             borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(10),
                                 topRight: Radius.circular(10))),
@@ -179,7 +184,7 @@ class _ProductScreenState extends State<LabScreen> {
                                 // Handle Discard Sale action
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.teal,
+                                backgroundColor: AppColors.primary,
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 20, vertical: 10),
                                 shape: RoundedRectangleBorder(
@@ -236,7 +241,7 @@ class _ProductScreenState extends State<LabScreen> {
                       ),
                       Container(
                         decoration: BoxDecoration(
-                            color: primaryClr,
+                            color: AppColors.primary,
                             borderRadius: const BorderRadius.only(
                                 bottomLeft: Radius.circular(10),
                                 bottomRight: Radius.circular(10))),

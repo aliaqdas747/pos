@@ -1,31 +1,27 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:hive/hive.dart';
 import 'package:point_of_sale/models/sales_Model.dart';
+import 'package:point_of_sale/themes_Colors.dart';
+import 'package:point_of_sale/utils/Custom_dialog.dart';
 import 'package:point_of_sale/utils/Quantity_custom.dart';
 import 'package:point_of_sale/utils/TextField.dart';
 import 'package:point_of_sale/utils/drawer.dart';
 import 'package:provider/provider.dart';
 
-class point_of_sale extends StatefulWidget {
-  point_of_sale({super.key});
+class PointOfSale extends StatefulWidget {
+  PointOfSale({super.key});
 
   @override
-  State<point_of_sale> createState() => _point_of_saleState();
+  State<PointOfSale> createState() => _PointOfSaleState();
 }
 
-class _point_of_saleState extends State<point_of_sale> {
+class _PointOfSaleState extends State<PointOfSale> {
+  DateTime _selectedDate = DateTime.now();
+  TimeOfDay _selectedTime = TimeOfDay(hour: 12, minute: 0);
+
   Future<void> _deleteProduct(String docId) async {
     await FirebaseFirestore.instance.collection('Cart').doc(docId).delete();
   }
-
-  ///Now its good ?
-  var PrimaryClr = Color(0xFF6C63FF);
-  DateTime _selectedDate = DateTime.now();
-  TimeOfDay _selectedTime = TimeOfDay(hour: 12, minute: 0);
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +44,7 @@ class _point_of_saleState extends State<point_of_sale> {
                       width: double.infinity,
                       height: 300,
                       decoration: BoxDecoration(
-                        color: PrimaryClr,
+                        color: AppColors.primary,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Column(
@@ -151,18 +147,13 @@ class _point_of_saleState extends State<point_of_sale> {
                           ),
                           Expanded(child: SizedBox()),
                           Container(
-                            color: Colors.grey.shade100,
+                            color: AppColors.primary,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Row(
                                   children: [
-                                    Product_Quantity(),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    // Save for Later Button
-                                    CategoryQuantity(),
+                                    SubTotal(),
                                   ],
                                 ),
                                 Row(
@@ -175,40 +166,34 @@ class _point_of_saleState extends State<point_of_sale> {
                                       },
                                       icon: Icon(
                                         Icons.shopping_cart_checkout,
-                                        color: PrimaryClr,
+                                        color: AppColors.primary,
                                       ),
                                       label: Text("ADD to Cart"),
                                     ),
                                     SizedBox(
                                       width: 10,
                                     ),
-                                    //Button for final bill
                                     ElevatedButton.icon(
                                       onPressed: () async {
-                                        await saleModel.AddCart(
-                                          context,
-                                        );
+                                        saleModel.finalizeSale(context);
                                       },
                                       icon: Icon(
                                         Icons.receipt,
-                                        color: PrimaryClr,
+                                        color: AppColors.primary,
                                       ),
                                       label: Text("Finalize"),
                                     )
                                   ],
                                 )
-                                //Button for add to cart
                               ],
                             ),
                           )
                         ],
                       ),
                     ),
-
-                    //Table coooooooooooooooooooode
                     Container(
                       decoration: BoxDecoration(
-                        color: PrimaryClr,
+                        color: AppColors.primary,
                         borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(10),
                             topRight: Radius.circular(10)),
@@ -224,40 +209,41 @@ class _point_of_saleState extends State<point_of_sale> {
                           if (!snapshot.hasData) {
                             return Center(child: CircularProgressIndicator());
                           }
-                          var CartProducts = snapshot.data!.docs;
+                          var cartProducts = snapshot.data!.docs;
                           return SingleChildScrollView(
-                              physics: BouncingScrollPhysics(),
-                              child: DataTable(
-                                  columns: [
-                                    DataColumn(label: Text("Product Id")),
-                                    DataColumn(label: Text("Name")),
-                                    DataColumn(label: Text("Quantity")),
-                                    DataColumn(label: Text("Price")),
-                                    DataColumn(label: Text("Action")),
-                                  ],
-                                  rows: CartProducts.map((doc) {
-                                    var data =
-                                        doc.data() as Map<String, dynamic>;
-                                    String docId = doc.id;
-                                    return DataRow(cells: [
-                                      DataCell(Text(data['Id'] ?? '')),
-                                      DataCell(Text(data['Name'])),
-                                      DataCell(Text(data['Quantity'])),
-                                      DataCell(Text(data['Price'])),
-                                      DataCell(Tooltip(
-                                        message: 'Delete from table',
-                                        child: IconButton(
-                                          icon: Icon(
-                                            Icons.delete,
-                                            color: Colors.white,
-                                          ),
-                                          onPressed: () {
-                                            _deleteProduct(docId);
-                                          },
-                                        ),
-                                      )),
-                                    ]);
-                                  }).toList()));
+                            physics: BouncingScrollPhysics(),
+                            child: DataTable(
+                              columns: [
+                                DataColumn(label: Text("Product Id")),
+                                DataColumn(label: Text("Name")),
+                                DataColumn(label: Text("Quantity")),
+                                DataColumn(label: Text("Price")),
+                                DataColumn(label: Text("Action")),
+                              ],
+                              rows: cartProducts.map((doc) {
+                                var data = doc.data() as Map<String, dynamic>;
+                                String docId = doc.id;
+                                return DataRow(cells: [
+                                  DataCell(Text(data['Id'].toString())),
+                                  DataCell(Text(data['Name'])),
+                                  DataCell(Text(data['Quantity'].toString())),
+                                  DataCell(Text(data['Price'].toString())),
+                                  DataCell(Tooltip(
+                                    message: 'Delete from table',
+                                    child: IconButton(
+                                      icon: Icon(
+                                        Icons.delete,
+                                        color: Colors.white,
+                                      ),
+                                      onPressed: () {
+                                        _deleteProduct(docId);
+                                      },
+                                    ),
+                                  )),
+                                ]);
+                              }).toList(),
+                            ),
+                          );
                         },
                       ),
                     )
@@ -271,5 +257,3 @@ class _point_of_saleState extends State<point_of_sale> {
     );
   }
 }
-/*  builder: (context, snapshot) {
-                              if (!snapshot.hasData) {*/

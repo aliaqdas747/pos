@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:point_of_sale/themes_Colors.dart';
 
 class Searchbar extends StatefulWidget {
   const Searchbar({super.key});
@@ -9,7 +10,6 @@ class Searchbar extends StatefulWidget {
 }
 
 class _SearchbarState extends State<Searchbar> {
-  final Color primaryClr = const Color(0xFF6C63FF);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,22 +19,22 @@ class _SearchbarState extends State<Searchbar> {
       child: SizedBox(
         width: 100,
         child: TextField(
-          style: TextStyle(color: primaryClr),
+          style: TextStyle(color: AppColors.primary),
           decoration: InputDecoration(
             suffixIcon: IconButton(
               onPressed: () {},
-              icon: Icon(Icons.search, color: primaryClr),
+              icon: Icon(Icons.search, color: AppColors.primary),
             ),
             label: Text(
               "Search here...",
-              style: TextStyle(color: primaryClr, fontSize: 25),
+              style: TextStyle(color: AppColors.primary, fontSize: 25),
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: primaryClr, width: 1.0),
+              borderSide: BorderSide(color: AppColors.primary, width: 1.0),
               borderRadius: BorderRadius.circular(10),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: primaryClr, width: 1.0),
+              borderSide: BorderSide(color: AppColors.primary, width: 1.0),
               borderRadius: BorderRadius.circular(10),
             ),
           ),

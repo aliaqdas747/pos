@@ -1,188 +1,111 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../utils/drawer.dart';
+import 'package:point_of_sale/screens/homePage.dart';
+import 'package:point_of_sale/themes_Colors.dart';
 
- class SaleRecord extends StatefulWidget {
-   const SaleRecord({super.key});
+class SalesRecordPage extends StatefulWidget {
+  @override
+  _SalesRecordPageState createState() => _SalesRecordPageState();
+}
 
-   @override
-   State<SaleRecord> createState() => _SaleRecordState();
- }
-final Color PrimaryClr =const Color(0xFF6C63FF);
+class _SalesRecordPageState extends State<SalesRecordPage> {
+  Map<String, List<SaleData>> _salesRecords = {};
 
- class _SaleRecordState extends State<SaleRecord> {
-   @override
-   Widget build(BuildContext context) {
-     return Scaffold(
-       appBar: AppBar(
-         automaticallyImplyLeading: false,
-         shadowColor: Colors.black54,
-         elevation: 10.0,
-         centerTitle: true,
-         title: Text("Sales Records", style: Theme.of(context).textTheme.headlineLarge),
-         actions: [
-           StreamBuilder(
-             stream:  Stream.periodic(Duration(seconds: 45)),
-             builder: (context, snapshot) {
-               return Text(
-                   "Time  ${DateTime.now().hour}:${DateTime.now().minute} ",
-                   style:Theme.of(context).textTheme.headlineMedium
-               );
-             },
-           ),
-           const  SizedBox(width: 30,)
-         ],
-         backgroundColor: PrimaryClr,
-       ),
-       body: Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-         children: [
-           DrawerWidget(title: 'SALES RECORD', imagePath: 'assets/images/sales.png',),
-           Flexible(
-             flex: 3,
-             child: SingleChildScrollView(
-               child: Column(
-                 mainAxisAlignment: MainAxisAlignment.center,
-                 children: [
-                   Container(
-                     margin:const EdgeInsets.only(left: 20,right: 20,bottom: 10),
-                     height: 50,width:double.infinity,
-                     child: SizedBox(
-                       width: 100,
-                       child:   TextField(style: TextStyle(color: PrimaryClr),
-               
-                         decoration: InputDecoration(
-               
-                           suffixIcon: IconButton(onPressed: (){}, icon: Icon(Icons.search,color: PrimaryClr),),
-                           label: Text("Search here...", style: TextStyle(color: PrimaryClr,fontSize: 25),),
-                           enabledBorder: OutlineInputBorder(
-                             borderSide: BorderSide(color: PrimaryClr, width: 1.0),
-                             borderRadius: BorderRadius.circular(10),
-                           ),
-                           focusedBorder: OutlineInputBorder(
-                             borderSide: BorderSide(color: PrimaryClr, width: 1.0),
-                             borderRadius: BorderRadius.circular(10),
-                           ),
-                         ),
-                       ),
-                     ),
-                   ),
-                   Container(
-                     decoration: BoxDecoration(
-                         color: PrimaryClr,
-                         borderRadius:const BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10))
-                     ),
-                     margin:const EdgeInsets.only(left: 20, right: 20),
-                     height: 500,
-                     width: double.infinity,
-                     child:   DataTable(
-                       columns: const [
-                         DataColumn(label: Text('Product ID')),
-                         DataColumn(label: Text('Name')),
-                         DataColumn(label: Text('QUANTITY')),
-                         DataColumn(label: Text('Price')),
-                       ],
-                       rows: const [
-                         DataRow(
-                           cells: [
-                             DataCell(Text('1')),
-                             DataCell(Text('Apple iPhone')),
-                             DataCell(Text('2')),
-                             DataCell(Text('1200')),
-                           ],
-                         ),
-                         DataRow(
-                           cells: [
-                             DataCell(Text('2')),
-                             DataCell(Text('Samsung TV')),
-                             DataCell(Text('1')),
-                             DataCell(Text('800')),
-                           ],
-                         ),
-                         DataRow(
-                           cells:const [
-                             DataCell(Text('3')),
-                             DataCell(Text('Nike Shoes')),
-                             DataCell(Text('3')),
-                             DataCell(Text('500')),
-                           ],
-                         ),
-                         DataRow(
-                           cells:const [
-                             DataCell(Text('3')),
-                             DataCell(Text('Nike Shoes')),
-                             DataCell(Text('3')),
-                             DataCell(Text('500')),
-                           ],
-                         ),
-                         DataRow(
-                           cells:const [
-                             DataCell(Text('3')),
-                             DataCell(Text('Nike Shoes')),
-                             DataCell(Text('3')),
-                             DataCell(Text('500')),
-                           ],
-                         ),
-                         DataRow(
-                           cells:const [
-                             DataCell(Text('3')),
-                             DataCell(Text('Nike Shoes')),
-                             DataCell(Text('3')),
-                             DataCell(Text('500')),
-                           ],
-                         ),
-                         DataRow(
-                           cells:const [
-                             DataCell(Text('3')),
-                             DataCell(Text('Nike Shoes')),
-                             DataCell(Text('3')),
-                             DataCell(Text('500')),
-                           ],
-                         ),
-                       ],
-                     ),
-                   ),
-                      Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.only(left: 20, right: 20, bottom: 10),
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Wrap(
-                          alignment: WrapAlignment.spaceEvenly,
-                          children: [
-               ElevatedButton(
-               
-                 onPressed: () {
-                   // Handle Discard Sale action
-                 },
-                 style: ElevatedButton.styleFrom(
-                   backgroundColor: Colors.teal,
-                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                   shape: RoundedRectangleBorder(
-                     borderRadius: BorderRadius.circular(10),
-                   ),
-                 ),
-                 child: Text(
-                   "Clear Data",
-                   style: TextStyle(color: Colors.white, fontSize: 16),
-                 ),
-               ),
-               // Save for Later Button
-               
-                          ],
-                        ),
+  void _addSale(String date, SaleData saleData) {
+    if (!_salesRecords.containsKey(date)) {
+      _salesRecords[date] = [];
+    }
+    _salesRecords[date]!.add(saleData);
+  }
+
+  List<SaleData> _getSalesByDate(String date) {
+    return _salesRecords[date] ?? [];
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _addSale('2023-03-01', SaleData(item: 'Item 1', quantity: 2, price: 10.99));
+    _addSale('2023-03-01', SaleData(item: 'Item 2', quantity: 3, price: 9.99));
+    _addSale('2023-03-02', SaleData(item: 'Item 3', quantity: 1, price: 12.99));
+    _addSale('2023-03-02', SaleData(item: 'Item 4', quantity: 4, price: 8.99));
+    _addSale('2023-03-03', SaleData(item: 'Item 5', quantity: 2, price: 11.99));
+    _addSale('2023-03-04', SaleData(item: 'Item 6', quantity: 1, price: 14.99));
+    _addSale('2023-03-05', SaleData(item: 'Item 7', quantity: 3, price: 13.99));
+    _addSale('2023-03-05', SaleData(item: 'Item 8', quantity: 2, price: 10.99));
+    _addSale('2023-03-06', SaleData(item: 'Item 9', quantity: 1, price: 12.99));
+    _addSale('2023-03-07', SaleData(item: 'Item 10', quantity: 4, price: 9.99));
+    _addSale(
+        '2023-03-08', SaleData(item: 'Item 11', quantity: 2, price: 11.99));
+    _addSale(
+        '2023-03-09', SaleData(item: 'Item 12', quantity: 1, price: 14.99));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.primary,
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => MyHomePage()));
+          },
+        ),
+        automaticallyImplyLeading: true,
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: AppColors.primary,
+        foregroundColor: Colors.black,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Text(
+              'Sales Records',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 16),
+            Expanded(
+              child: ListView.builder(
+                itemCount: _salesRecords.keys.length,
+                itemBuilder: (context, index) {
+                  String date = _salesRecords.keys.elementAt(index);
+                  return Card(
+                    child: ExpansionTile(
+                      title: Text(
+                        date,
+                        style: TextStyle(fontSize: 18),
                       ),
-                 ],
-               ),
-             ),
-           ),
+                      children: _getSalesByDate(date).map((sale) {
+                        return ListTile(
+                          title: Text(sale.item),
+                          subtitle: Text(
+                            'Quantity: ${sale.quantity}, Price: ${sale.price}',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
+class SaleData {
+  String item;
+  int quantity;
+  double price;
 
-         ],
-       ),
-     );
-   }
- }
+  SaleData({required this.item, required this.quantity, required this.price});
+}

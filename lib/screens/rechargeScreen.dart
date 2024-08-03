@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:point_of_sale/themes_Colors.dart';
 
 import 'package:point_of_sale/utils/drawer.dart';
 
@@ -12,8 +13,6 @@ class RechargeScreen extends StatefulWidget {
 }
 
 class _RechargeScreenState extends State<RechargeScreen> {
-  final Color primaryClr = const Color(0xFF6C63FF);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,10 +50,10 @@ class _RechargeScreenState extends State<RechargeScreen> {
                       ),
                       Text(
                         'Mobile',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineSmall!
-                            .copyWith(color: primaryClr),
+                        style:
+                            Theme.of(context).textTheme.headlineSmall!.copyWith(
+                                  color: AppColors.primary,
+                                ),
                       ),
                       SizedBox(
                         width: 20,
@@ -70,10 +69,10 @@ class _RechargeScreenState extends State<RechargeScreen> {
                       ),
                       Text(
                         'Network',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineSmall!
-                            .copyWith(color: primaryClr),
+                        style:
+                            Theme.of(context).textTheme.headlineSmall!.copyWith(
+                                  color: AppColors.primary,
+                                ),
                       )
                     ],
                   ),
@@ -122,7 +121,7 @@ class _RechargeScreenState extends State<RechargeScreen> {
                       // Handle Discard Sale action
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryClr,
+                      backgroundColor: AppColors.primary,
                       padding:
                           EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                       shape: RoundedRectangleBorder(
@@ -152,24 +151,30 @@ class _RechargeScreenState extends State<RechargeScreen> {
                       child: SizedBox(
                         width: 100,
                         child: TextField(
-                          style: TextStyle(color: primaryClr),
+                          style: TextStyle(
+                            color: AppColors.primary,
+                          ),
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
                               onPressed: () {},
-                              icon: Icon(Icons.search, color: primaryClr),
+                              icon: Icon(
+                                Icons.search,
+                                color: AppColors.primary,
+                              ),
                             ),
                             label: Text(
                               "Search here...",
-                              style: TextStyle(color: primaryClr, fontSize: 25),
+                              style: TextStyle(
+                                  color: AppColors.primary, fontSize: 25),
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: primaryClr, width: 1.0),
+                              borderSide: BorderSide(
+                                  color: AppColors.primary, width: 1.0),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: primaryClr, width: 1.0),
+                              borderSide: BorderSide(
+                                  color: AppColors.primary, width: 1.0),
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
@@ -178,7 +183,7 @@ class _RechargeScreenState extends State<RechargeScreen> {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                          color: primaryClr,
+                          color: AppColors.primary,
                           borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(10),
                               topRight: Radius.circular(10))),

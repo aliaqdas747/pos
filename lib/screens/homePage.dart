@@ -7,6 +7,7 @@ import 'package:point_of_sale/screens/mobiles.dart';
 import 'package:point_of_sale/screens/pos.dart';
 import 'package:point_of_sale/screens/rechargeScreen.dart';
 import 'package:point_of_sale/screens/users.dart';
+import 'package:point_of_sale/themes_Colors.dart';
 import 'package:point_of_sale/utils/Summary_card.dart';
 import 'package:point_of_sale/utils/cards.dart';
 import 'package:point_of_sale/utils/todo_card.dart';
@@ -23,7 +24,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final Color PrimaryClr = Color(0xFF6C63FF);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,15 +47,15 @@ class _MyHomePageState extends State<MyHomePage> {
             width: 30,
           )
         ],
-        backgroundColor: PrimaryClr,
+        backgroundColor: AppColors.primary,
       ),
       body: Row(
         children: [
           Flexible(
             child: Container(
               width: 300, // Set the width of the drawer
-              color:
-                  Colors.grey[200], // Optional background color for the drawer
+              color: AppColors
+                  .secondary, // Optional background color for the drawer
               child: Column(
                 children: [
                   UserAccountsDrawerHeader(
@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       backgroundImage: AssetImage(
                           'assets/images/profile.png'), // Your profile image
                     ),
-                    decoration: BoxDecoration(color: PrimaryClr),
+                    decoration: BoxDecoration(color: AppColors.primary),
                   ),
                   Flexible(child: Todo_Card()),
 
@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge!
-                          .copyWith(color: Colors.deepPurpleAccent),
+                          .copyWith(color: AppColors.primary),
                     ),
                   )
 
@@ -99,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             title: 'POINT OF SALE',
                             cardImg: 'assets/images/pos.png',
                             OnPressed: () {
-                              Get.off(() => point_of_sale());
+                              Get.off(() => PointOfSale());
                             }),
                         home_cards(
                             title: 'PRODUCTS',
@@ -132,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           title: 'SALES RECORDS',
                           cardImg: 'assets/images/sales.png',
                           OnPressed: () {
-                            Get.off(() => SaleRecord());
+                            Get.off(() => SalesRecordPage());
                           },
                         ),
                         home_cards(
@@ -153,7 +153,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     Container(
                       width: double.infinity,
-                      color: PrimaryClr,
+                      color: AppColors.primary,
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
