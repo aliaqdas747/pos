@@ -5,6 +5,7 @@ import 'package:dropdownfield2/dropdownfield2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:point_of_sale/utils/Quantity_custom.dart';
 import 'package:provider/provider.dart';
 
 class SaleModel with ChangeNotifier {
@@ -25,33 +26,50 @@ class SaleModel with ChangeNotifier {
 
     if (idParsed == null) {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Id should be  Numeric')));
+          .showSnackBar(SnackBar(content: Text('Id box should have number')));
       return;
     }
+
     final priceParsed = int.tryParse(price);
     if (priceParsed == null) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Price should be Numeric')));
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Price box should have number')));
       return;
     }
+
     try {
-      final cartRecord = {
-        'Id': idParsed,
-        'Name': name,
-        'Quantity': quantityParsed,
-        'Price': priceParsed,
-      };
-      await FirebaseFirestore.instance.collection('Cart').doc().set(cartRecord);
-      idController.clear();
-      nameController.clear();
-      quantityController.text = '1';
-      priceController.clear();
+      DocumentSnapshot currentStock =
+          await FirebaseFirestore.instance.collection('Products').doc(id).get();
+      if (currentStock.exists) {
+        try {
+          final totalPrice = priceParsed * quantityParsed!;
+          final cartRecord = {
+            'Id': idParsed,
+            'Name': name,
+            'Quantity': quantityParsed,
+            'Price': totalPrice,
+          };
+          await FirebaseFirestore.instance
+              .collection('Cart')
+              .doc()
+              .set(cartRecord);
+          idController.clear();
+          nameController.clear();
+          quantityController.text = '1';
+          priceController.clear();
+        } catch (e) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text('Error:$e')));
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('This product not in stock records')));
+      }
     } catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Error:$e')));
     }
   }
-//Function to move cart items to SaleRecords collection
 
 //Function to fetch Name by id
   Future<void> fetchNamebyId(
@@ -74,7 +92,7 @@ class SaleModel with ChangeNotifier {
   //Function to move data to from cart to SaleRecords page
   Future<void> finalizeSale(BuildContext context) async {
     try {
-//To get all cart items
+      // To get all cart items
       QuerySnapshot cartSnapshot =
           await FirebaseFirestore.instance.collection('Cart').get();
 
@@ -84,42 +102,73 @@ class SaleModel with ChangeNotifier {
         );
         return;
       }
-      //Get current date as YYYY-MM-DD
+
+      // Get current date as YYYY-MM-DD
       String currentDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
 
-      //Reference to daily  Sale document
+      // Reference to daily Sale document
       CollectionReference dailySalesCollection = FirebaseFirestore.instance
           .collection('sales_records')
           .doc(currentDate)
           .collection('Records');
 
-      //Prepare Batch write
+      // Prepare Batch write
       WriteBatch batch = FirebaseFirestore.instance.batch();
 
+      // Use a FutureBuilder to ensure product data is fetched before updating
+      List<Future<void>> futures = [];
+
       for (QueryDocumentSnapshot cartDoc in cartSnapshot.docs) {
-        //Extract specific fields from the cart document
+        // Extract specific fields from the cart document
         Map<String, dynamic> cartData = cartDoc.data() as Map<String, dynamic>;
 
         Map<String, dynamic> saleRecordsData = {
+          'Id': cartData['Id'],
           'item': cartData['Name'],
           'quantity': cartData['Quantity'],
           'price': cartData['Price'],
           'timestamp': FieldValue.serverTimestamp()
         };
-        //Create a new document in the Records subcollection
+
+        // Create a new document in the Records subcollection
         DocumentReference saleRecordRef = dailySalesCollection.doc();
         batch.set(saleRecordRef, saleRecordsData);
 
-        //Delete the document form cart collection
+        // Update the product quantity in the Products Collection
+        DocumentReference productRef = FirebaseFirestore.instance
+            .collection('Products')
+            .doc(cartData['Id'].toString());
+
+        // Add a future to fetch product data and update quantity
+        futures.add(productRef.get().then((productSnapshot) {
+          if (productSnapshot.exists) {
+            Map<String, dynamic> productData =
+                productSnapshot.data() as Map<String, dynamic>;
+            int currentQuantity = productData['Quantity'] ?? 0;
+            int cartQuantity = cartData['Quantity'] ?? 0;
+
+            // Calculate the new Quantity
+            int newQuantity = currentQuantity - cartQuantity;
+            if (newQuantity < 0)
+              newQuantity = 0; // Ensure quantity doesn't go negative
+            batch.update(productRef, {'Quantity': newQuantity});
+          }
+        }));
+
+        // Delete the document from cart collection
         batch.delete(cartDoc.reference);
       }
+
+      // Wait for all futures to complete before committing batch
+      await Future.wait(futures);
       await batch.commit();
+
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Bill is Saved in Sales Records')));
       notifyListeners();
     } catch (e) {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Error:$e')));
+          .showSnackBar(SnackBar(content: Text('Error: $e')));
     }
   }
 

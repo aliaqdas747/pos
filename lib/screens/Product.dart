@@ -146,7 +146,8 @@ class _ProductScreenState extends State<ProductScreen> {
                                         DataCell(Text(data['Category'] ?? '')),
                                         DataCell(Text(
                                             data['Price'].toString() ?? '')),
-                                        DataCell(Text(data['Quantity'] ?? '')),
+                                        DataCell(Text(
+                                            data['Quantity'].toString() ?? '')),
                                         DataCell(Row(
                                           children: [
                                             IconButton(

@@ -23,6 +23,7 @@ class ProductModel with ChangeNotifier {
         productQuantity.isNotEmpty &&
         productPrice != null &&
         value != null) {
+      final quantityParsed = int.tryParse(productQuantity);
       DocumentSnapshot productDoc = await FirebaseFirestore.instance
           .collection('Products')
           .doc(productId)
@@ -34,7 +35,7 @@ class ProductModel with ChangeNotifier {
           'ID': productId,
           'Name': productName,
           'Category': value,
-          'Quantity': productQuantity,
+          'Quantity': quantityParsed,
           'Price': productPrice,
         };
         FirebaseFirestore.instance
