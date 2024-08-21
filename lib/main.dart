@@ -1,9 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:point_of_sale/auth/loginScreen.dart';
 import 'package:point_of_sale/models/sales_Model.dart';
-
-import 'package:point_of_sale/screens/homePage.dart';
 import 'package:point_of_sale/utils/textTheme.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
@@ -38,7 +37,7 @@ class MyApp extends StatelessWidget {
         primaryColor: const Color(0xFF6C63FF),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      home: const LoginScreen(),
     );
   }
 }

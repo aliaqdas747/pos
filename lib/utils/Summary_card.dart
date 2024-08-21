@@ -41,7 +41,7 @@ class _SumryCardState extends State<SumryCard> {
                   fontWeight: FontWeight.bold,
                 ),
           ),
-          SizedBox(height: 10), // Added space between title and amount
+          const SizedBox(height: 10), // Added space between title and amount
           Text(
             widget.amount,
             style: Theme.of(context).textTheme.headlineMedium!.copyWith(

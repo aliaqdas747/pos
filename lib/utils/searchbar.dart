@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:point_of_sale/themes_Colors.dart';
 
@@ -19,13 +18,13 @@ class _SearchbarState extends State<Searchbar> {
       child: SizedBox(
         width: 100,
         child: TextField(
-          style: TextStyle(color: AppColors.primary),
+          style: const TextStyle(color: AppColors.primary),
           decoration: InputDecoration(
             suffixIcon: IconButton(
               onPressed: () {},
-              icon: Icon(Icons.search, color: AppColors.primary),
+              icon: const Icon(Icons.search, color: AppColors.primary),
             ),
-            label: Text(
+            label: const Text(
               "Search here...",
               style: TextStyle(color: AppColors.primary, fontSize: 25),
             ),
@@ -34,7 +33,8 @@ class _SearchbarState extends State<Searchbar> {
               borderRadius: BorderRadius.circular(10),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColors.primary, width: 1.0),
+              borderSide:
+                  const BorderSide(color: AppColors.primary, width: 1.0),
               borderRadius: BorderRadius.circular(10),
             ),
           ),

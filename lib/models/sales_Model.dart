@@ -1,11 +1,8 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdownfield2/dropdownfield2.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:point_of_sale/utils/Quantity_custom.dart';
+
 import 'package:provider/provider.dart';
 
 class SaleModel with ChangeNotifier {
@@ -25,15 +22,15 @@ class SaleModel with ChangeNotifier {
     final quantityParsed = int.tryParse(quantity);
 
     if (idParsed == null) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Id box should have number')));
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Id box should have number')));
       return;
     }
 
     final priceParsed = int.tryParse(price);
     if (priceParsed == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Price box should have number')));
+          const SnackBar(content: Text('Price box should have number')));
       return;
     }
 
@@ -63,7 +60,7 @@ class SaleModel with ChangeNotifier {
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('This product not in stock records')));
+            const SnackBar(content: Text('This product not in stock records')));
       }
     } catch (e) {
       ScaffoldMessenger.of(context)
@@ -89,7 +86,7 @@ class SaleModel with ChangeNotifier {
     }
   }
 
-  //Function to move data to from cart to SaleRecords page
+// Function to move data from cart to SalesRecords page
   Future<void> finalizeSale(BuildContext context) async {
     try {
       // To get all cart items
@@ -98,19 +95,14 @@ class SaleModel with ChangeNotifier {
 
       if (cartSnapshot.docs.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Cart is Empty, No items to finalize")),
+          const SnackBar(content: Text("Cart is Empty, No items to finalize")),
         );
         return;
       }
 
-      // Get current date as YYYY-MM-DD
-      String currentDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
-
-      // Reference to daily Sale document
-      CollectionReference dailySalesCollection = FirebaseFirestore.instance
-          .collection('sales_records')
-          .doc(currentDate)
-          .collection('Records');
+      // Reference to sales_records collection
+      CollectionReference salesCollection =
+          FirebaseFirestore.instance.collection('sales_records');
 
       // Prepare Batch write
       WriteBatch batch = FirebaseFirestore.instance.batch();
@@ -122,7 +114,7 @@ class SaleModel with ChangeNotifier {
         // Extract specific fields from the cart document
         Map<String, dynamic> cartData = cartDoc.data() as Map<String, dynamic>;
 
-        Map<String, dynamic> saleRecordsData = {
+        Map<String, dynamic> saleRecordData = {
           'Id': cartData['Id'],
           'item': cartData['Name'],
           'quantity': cartData['Quantity'],
@@ -130,9 +122,10 @@ class SaleModel with ChangeNotifier {
           'timestamp': FieldValue.serverTimestamp()
         };
 
-        // Create a new document in the Records subcollection
-        DocumentReference saleRecordRef = dailySalesCollection.doc();
-        batch.set(saleRecordRef, saleRecordsData);
+        // Create a new document in the sales_records collection with auto-generated ID
+        DocumentReference saleRecordRef =
+            salesCollection.doc(); // Auto-generated ID
+        batch.set(saleRecordRef, saleRecordData);
 
         // Update the product quantity in the Products Collection
         DocumentReference productRef = FirebaseFirestore.instance
@@ -164,12 +157,72 @@ class SaleModel with ChangeNotifier {
       await batch.commit();
 
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Bill is Saved in Sales Records')));
+          const SnackBar(content: Text('Bill is Saved in Sales Records')));
       notifyListeners();
     } catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Error: $e')));
     }
+  }
+
+//Function to show data in list
+  Future<List<Map<String, dynamic>>> fetchSaleRecords(String date) async {
+    List<Map<String, dynamic>> saleRecordsList = [];
+
+    try {
+      // Reference to the daily Sale document
+      CollectionReference dailySalesCollection = FirebaseFirestore.instance
+          .collection('Sale Records')
+          .doc(date)
+          .collection('Records');
+
+      // Fetching the records
+      QuerySnapshot querySnapshot = await dailySalesCollection.get();
+
+      // Check if there are any records
+      if (querySnapshot.docs.isEmpty) {
+        print("No sale records found for the date: $date");
+        return saleRecordsList; // Return an empty list
+      }
+
+      // Iterate through the documents and extract data
+      for (QueryDocumentSnapshot doc in querySnapshot.docs) {
+        Map<String, dynamic> recordData = doc.data() as Map<String, dynamic>;
+        saleRecordsList.add(recordData); // Add the record to the list
+      }
+
+      return saleRecordsList; // Return the populated list
+    } catch (e) {
+      print("Error fetching sale records: $e");
+      return []; // Return an empty list in case of error
+    }
+  }
+
+//Function to fetch name
+
+  Future<List<String>> getAllSaleDates() async {
+    List<String> saleDates = [];
+
+    try {
+      // Get the collection reference for 'Sale Records'
+      CollectionReference saleRecordsCollection =
+          FirebaseFirestore.instance.collection('Sale Records');
+
+      // Get all documents from the 'Sale Records' collection
+      QuerySnapshot snapshot = await saleRecordsCollection.get();
+
+      // Iterate over the documents and add the document IDs (dates) to the list
+      for (QueryDocumentSnapshot doc in snapshot.docs) {
+        saleDates.add(doc.id); // The document ID is the date string
+      }
+
+      // Print the list of dates
+      print(saleDates);
+    } catch (e) {
+      print('Error fetching sale dates: $e');
+    }
+
+    return saleDates;
   }
 
 //Function to fetch Id by Name

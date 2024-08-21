@@ -60,8 +60,8 @@ class ProductModel with ChangeNotifier {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Error', style: TextStyle(color: Colors.black)),
-          content: Text('Please fill all the fields',
+          title: const Text('Error', style: TextStyle(color: Colors.black)),
+          content: const Text('Please fill all the fields',
               style: TextStyle(color: Colors.black)),
           actions: <Widget>[
             ElevatedButton(
@@ -72,7 +72,7 @@ class ProductModel with ChangeNotifier {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('OK', style: TextStyle(color: Colors.white)),
+              child: const Text('OK', style: TextStyle(color: Colors.white)),
             )
           ],
         );
@@ -94,8 +94,8 @@ class ProductModel with ChangeNotifier {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Error', style: TextStyle(color: Colors.black)),
-          content: Text('Product already exists',
+          title: const Text('Error', style: TextStyle(color: Colors.black)),
+          content: const Text('Product already exists',
               style: TextStyle(color: Colors.black)),
           actions: <Widget>[
             ElevatedButton(
@@ -106,7 +106,7 @@ class ProductModel with ChangeNotifier {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('OK', style: TextStyle(color: Colors.white)),
+              child: const Text('OK', style: TextStyle(color: Colors.white)),
             )
           ],
         );
@@ -115,10 +115,11 @@ class ProductModel with ChangeNotifier {
   }
 }
 
+//Dropdown btn to fetch   category  name and it show it in the its list
 class DecoratedDropdown extends StatefulWidget {
   final ProductModel productModel;
 
-  DecoratedDropdown(this.productModel);
+  const DecoratedDropdown(this.productModel);
 
   @override
   _DecoratedDropdownState createState() => _DecoratedDropdownState();
@@ -135,7 +136,7 @@ class _DecoratedDropdownState extends State<DecoratedDropdown> {
     fetchCategoryNames();
   }
 
-  // Fetching category names in dropdown button
+  // Fetching category names inadropdown button
   Future<void> fetchCategoryNames() async {
     QuerySnapshot querySnapshot =
         await FirebaseFirestore.instance.collection('Categories').get();
@@ -146,16 +147,15 @@ class _DecoratedDropdownState extends State<DecoratedDropdown> {
     });
   }
 
-  @override
   Widget build(BuildContext context) {
     return Container(
       height: 40,
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
         color: AppColors.primary,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: AppColors.secondary, width: 1),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.black26,
             blurRadius: 5,
@@ -165,10 +165,10 @@ class _DecoratedDropdownState extends State<DecoratedDropdown> {
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
-          hint:
-              Text('Select a Category', style: TextStyle(color: Colors.black)),
+          hint: const Text('Select a Category',
+              style: TextStyle(color: Colors.black)),
           value: _selectedValue,
-          icon: Icon(Icons.arrow_drop_down, color: Colors.black),
+          icon: const Icon(Icons.arrow_drop_down, color: Colors.black),
           iconSize: 24,
           isExpanded: true,
           onChanged: (String? newValue) {
@@ -182,7 +182,7 @@ class _DecoratedDropdownState extends State<DecoratedDropdown> {
             return DropdownMenuItem<String>(
               value: value,
               child: DefaultTextStyle(
-                style: TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.black),
                 child: Text('$value'),
               ),
             );

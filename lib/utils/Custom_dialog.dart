@@ -16,7 +16,7 @@ class _Custom_Dialog extends State<Custom_Dialog> {
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return AlertDialog(
-            content: Center(
+            content: const Center(
               child: Text("NO Item in Cart"),
             ),
             actions: [
@@ -60,7 +60,7 @@ class _Custom_Dialog extends State<Custom_Dialog> {
               child: Column(
                 children: CartProducts.map((doc) {
                   var data = doc.data() as Map<String, dynamic>;
-                  return Column(
+                  return const Column(
                     children: [],
                   );
                 }).toList(),
@@ -70,7 +70,7 @@ class _Custom_Dialog extends State<Custom_Dialog> {
           actions: [
             Text(
               'Total: ${totalPrice.toStringAsFixed(2)}',
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.green),

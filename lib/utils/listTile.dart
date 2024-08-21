@@ -5,7 +5,7 @@ class CustomListTile extends StatelessWidget {
   final String title;
   final VoidCallback onPressed;
 
-  CustomListTile({
+  const CustomListTile({
     required this.icon,
     required this.title,
     required this.onPressed,
@@ -21,14 +21,13 @@ class CustomListTile extends StatelessWidget {
       ),
       title: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 16.0,
           fontWeight: FontWeight.w500,
           color: Colors.white,
         ),
       ),
-      trailing: Icon(
-
+      trailing: const Icon(
         Icons.arrow_forward_ios,
         color: Colors.white,
         size: 18.0,

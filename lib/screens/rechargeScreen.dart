@@ -25,7 +25,7 @@ class _RechargeScreenState extends State<RechargeScreen> {
           ),
           Flexible(
             child: Container(
-              margin: EdgeInsets.all(20),
+              margin: const EdgeInsets.all(20),
               width: 400,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +55,7 @@ class _RechargeScreenState extends State<RechargeScreen> {
                                   color: AppColors.primary,
                                 ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       Checkbox(
@@ -76,7 +76,7 @@ class _RechargeScreenState extends State<RechargeScreen> {
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(
@@ -86,10 +86,10 @@ class _RechargeScreenState extends State<RechargeScreen> {
                         .headlineSmall!
                         .copyWith(color: Colors.black),
                   ),
-                  TextField(
+                  const TextField(
                     style: TextStyle(color: Colors.black),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(
@@ -99,8 +99,8 @@ class _RechargeScreenState extends State<RechargeScreen> {
                         .headlineSmall!
                         .copyWith(color: Colors.black),
                   ),
-                  DropButton(),
-                  SizedBox(
+                  const DropButton(),
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(
@@ -110,10 +110,10 @@ class _RechargeScreenState extends State<RechargeScreen> {
                         .headlineSmall!
                         .copyWith(color: Colors.black),
                   ),
-                  TextField(
+                  const TextField(
                     style: TextStyle(color: Colors.black),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   ElevatedButton(
@@ -122,13 +122,13 @@ class _RechargeScreenState extends State<RechargeScreen> {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Save Records",
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
@@ -151,29 +151,29 @@ class _RechargeScreenState extends State<RechargeScreen> {
                       child: SizedBox(
                         width: 100,
                         child: TextField(
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: AppColors.primary,
                           ),
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
                               onPressed: () {},
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.search,
                                 color: AppColors.primary,
                               ),
                             ),
-                            label: Text(
+                            label: const Text(
                               "Search here...",
                               style: TextStyle(
                                   color: AppColors.primary, fontSize: 25),
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                   color: AppColors.primary, width: 1.0),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                   color: AppColors.primary, width: 1.0),
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -182,9 +182,9 @@ class _RechargeScreenState extends State<RechargeScreen> {
                       ),
                     ),
                     Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color: AppColors.primary,
-                          borderRadius: const BorderRadius.only(
+                          borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(10),
                               topRight: Radius.circular(10))),
                       margin: const EdgeInsets.only(left: 20, right: 20),

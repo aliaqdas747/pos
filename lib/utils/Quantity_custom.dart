@@ -14,24 +14,24 @@ class _CategoryQuantityState extends State<CategoryQuantity> {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       child: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('Categories').snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           int categoryCount = snapshot.data!.docs.length;
           return Row(
             children: [
-              Text(
+              const Text(
                 'Total Categories:  ',
                 style: TextStyle(
                     color: Colors.black, fontSize: 20, fontFamily: 'Schyler'),
               ),
               Text(
                 '$categoryCount',
-                style: TextStyle(fontSize: 20, color: Colors.green),
+                style: const TextStyle(fontSize: 20, color: Colors.green),
               ),
             ],
           );
@@ -54,24 +54,24 @@ class _Product_QuantityState extends State<Product_Quantity> {
     return Container(
       color: Colors.white,
       height: 50,
-      margin: EdgeInsets.symmetric(horizontal: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 10),
       child: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('Products').snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           int categoryCount = snapshot.data!.docs.length;
           return Row(
             children: [
-              Text(
+              const Text(
                 'Stock Products:  ',
                 style: TextStyle(
                     color: Colors.black, fontSize: 20, fontFamily: 'Schyler'),
               ),
               Text(
                 '$categoryCount',
-                style: TextStyle(fontSize: 20, color: Colors.green),
+                style: const TextStyle(fontSize: 20, color: Colors.green),
               ),
             ],
           );
@@ -94,12 +94,12 @@ class CartItemCount extends StatelessWidget {
           return Container(
             child: Text(
               'Total item count: ${snapshot.data?.docs.length}',
-              style: TextStyle(fontSize: 24),
+              style: const TextStyle(fontSize: 24),
             ),
           );
         } else {
           return Container(
-            child: Text('Loading...'),
+            child: const Text('Loading...'),
           );
         }
       },
@@ -178,18 +178,18 @@ class _ItemCountState extends State<ItemCount> {
       height: 50,
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(10)),
-      margin: EdgeInsets.symmetric(horizontal: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 10),
       child: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('Cart').snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           }
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return Center(
+            return const Center(
                 child: Text(
               'No Items',
               style: TextStyle(color: Colors.black),
@@ -198,14 +198,14 @@ class _ItemCountState extends State<ItemCount> {
           int itemCount = snapshot.data!.docs.length;
           return Row(
             children: [
-              Text(
+              const Text(
                 'Total items:  ',
                 style: TextStyle(
                     color: Colors.black, fontSize: 20, fontFamily: 'Schyler'),
               ),
               Text(
                 '$itemCount',
-                style: TextStyle(fontSize: 20, color: Colors.green),
+                style: const TextStyle(fontSize: 20, color: Colors.green),
               ),
             ],
           );

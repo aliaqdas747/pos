@@ -16,34 +16,34 @@ class _Todo_CardState extends State<Todo_Card> {
           borderRadius: BorderRadius.circular(20), color: AppColors.primary),
       width: double.infinity,
       height: 300,
-      margin: EdgeInsets.all(20),
+      margin: const EdgeInsets.all(20),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             TextField(
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 suffixIcon: IconButton(
                   onPressed: () {},
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.add,
                     color: Colors.white,
                   ),
                 ),
-                label: Text(
+                label: const Text(
                   "Add today's tasks",
                   style: TextStyle(
                     color: Colors.white,
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white, width: 1.0),
+                  borderSide: const BorderSide(color: Colors.white, width: 1.0),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white, width: 1.0),
+                  borderSide: const BorderSide(color: Colors.white, width: 1.0),
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),

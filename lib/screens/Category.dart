@@ -39,7 +39,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       ),
       body: Row(
         children: [
-          DrawerWidget(
+          const DrawerWidget(
               title: 'CATEGORIES', imagePath: 'assets/images/category.png'),
           Flexible(
             flex: 4,
@@ -101,27 +101,27 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       height: 50,
                       width: double.infinity,
                       child: TextField(
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: AppColors.primary,
                         ),
                         decoration: InputDecoration(
                           suffixIcon: IconButton(
                             onPressed: () {},
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.search,
                               color: AppColors.primary,
                             ),
                           ),
-                          label: Text("Search here",
+                          label: const Text("Search here",
                               style: TextStyle(
                                   color: AppColors.primary, fontSize: 25)),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                                 color: AppColors.primary, width: 1.0),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                                 color: AppColors.primary, width: 1.0),
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -131,9 +131,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
                     //DataTable
                     Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: AppColors.primary,
-                        borderRadius: const BorderRadius.only(
+                        borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(10),
                             topRight: Radius.circular(10)),
                       ),
@@ -146,11 +146,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             .snapshots(),
                         builder: (context, snapshot) {
                           if (!snapshot.hasData) {
-                            return Center(child: CircularProgressIndicator());
+                            return const Center(
+                                child: CircularProgressIndicator());
                           }
                           var categories = snapshot.data!.docs;
                           return SingleChildScrollView(
-                            physics: BouncingScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             child: DataTable(
                               columns: const [
                                 DataColumn(label: Text('CATEGORY NAME')),
@@ -173,7 +174,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                       Row(
                                         children: [
                                           IconButton(
-                                            icon: Icon(
+                                            icon: const Icon(
                                               Icons.delete,
                                               color: Colors.limeAccent,
                                             ),
@@ -195,9 +196,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
                     //Total Category Item
                     Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: AppColors.primary,
-                        borderRadius: const BorderRadius.only(
+                        borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(10),
                             bottomRight: Radius.circular(10)),
                       ),
@@ -210,7 +211,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             .snapshots(),
                         builder: (context, snapshot) {
                           if (!snapshot.hasData) {
-                            return Center(child: CircularProgressIndicator());
+                            return const Center(
+                                child: CircularProgressIndicator());
                           }
                           int categoryCount = snapshot.data!.docs.length;
                           return Wrap(

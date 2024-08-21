@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:point_of_sale/screens/LabScreen.dart';
 import 'package:point_of_sale/screens/mobiles.dart';
@@ -36,14 +34,14 @@ class _MyHomePageState extends State<MyHomePage> {
             Text("Dashboard", style: Theme.of(context).textTheme.headlineLarge),
         actions: [
           StreamBuilder(
-            stream: Stream.periodic(Duration(seconds: 45)),
+            stream: Stream.periodic(const Duration(seconds: 45)),
             builder: (context, snapshot) {
               return Text(
                   "Time  ${DateTime.now().hour}:${DateTime.now().minute} ",
                   style: Theme.of(context).textTheme.headlineMedium);
             },
           ),
-          SizedBox(
+          const SizedBox(
             width: 30,
           )
         ],
@@ -61,14 +59,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   UserAccountsDrawerHeader(
                     accountName: Text("POS",
                         style: Theme.of(context).textTheme.headlineMedium),
-                    accountEmail: Text("POINT OF SALE"),
-                    currentAccountPicture: CircleAvatar(
+                    accountEmail: const Text("POINT OF SALE"),
+                    currentAccountPicture: const CircleAvatar(
                       backgroundImage: AssetImage(
                           'assets/images/profile.png'), // Your profile image
                     ),
-                    decoration: BoxDecoration(color: AppColors.primary),
+                    decoration: const BoxDecoration(color: AppColors.primary),
                   ),
-                  Flexible(child: Todo_Card()),
+                  const Flexible(child: Todo_Card()),
 
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -105,48 +103,48 @@ class _MyHomePageState extends State<MyHomePage> {
                             title: 'PRODUCTS',
                             cardImg: 'assets/images/product.png',
                             OnPressed: () {
-                              Get.off(() => ProductScreen());
+                              Get.off(() => const ProductScreen());
                             }),
                         home_cards(
                           title: 'CATEGORY',
                           cardImg: 'assets/images/category.png',
                           OnPressed: () {
-                            Get.off(() => CategoryScreen());
+                            Get.off(() => const CategoryScreen());
                           },
                         ),
                         home_cards(
                           title: 'Recharge',
                           cardImg: 'assets/images/load.png',
                           OnPressed: () {
-                            Get.off(() => RechargeScreen());
+                            Get.off(() => const RechargeScreen());
                           },
                         ),
                         home_cards(
                           title: 'MOBILE PHONES',
                           cardImg: 'assets/images/phone.png',
                           OnPressed: () {
-                            Get.off(() => MobileScreen());
+                            Get.off(() => const MobileScreen());
                           },
                         ),
                         home_cards(
                           title: 'SALES RECORDS',
                           cardImg: 'assets/images/sales.png',
                           OnPressed: () {
-                            Get.off(() => SalesRecordPage());
+                            Get.off(() => SaleRecordsPage());
                           },
                         ),
                         home_cards(
                           title: 'Lab',
                           cardImg: 'assets/images/mobile.png',
                           OnPressed: () {
-                            Get.off(() => LabScreen());
+                            Get.off(() => const LabScreen());
                           },
                         ),
                         home_cards(
                           title: 'USERS',
                           cardImg: 'assets/images/man.png',
                           OnPressed: () {
-                            Get.off(() => UserScreen());
+                            Get.off(() => const UserScreen());
                           },
                         ),
                       ],
@@ -154,7 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Container(
                       width: double.infinity,
                       color: AppColors.primary,
-                      child: SingleChildScrollView(
+                      child: const SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,

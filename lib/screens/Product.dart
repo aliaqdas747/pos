@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:point_of_sale/models/product_model.dart';
-import 'package:point_of_sale/screens/SalesRecord.dart';
+
 import 'package:point_of_sale/themes_Colors.dart';
 import 'package:point_of_sale/utils/drawer.dart';
 import 'package:point_of_sale/utils/searchbar.dart';
-import '../utils/Summary_card.dart';
+
 import '../utils/TextField.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -43,7 +43,7 @@ class _ProductScreenState extends State<ProductScreen> {
         ),
         body: Row(
           children: [
-            DrawerWidget(
+            const DrawerWidget(
               title: 'PRODUCTS',
               imagePath: 'assets/images/product.png',
             ),
@@ -54,7 +54,7 @@ class _ProductScreenState extends State<ProductScreen> {
                   child: Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.all(20),
+                        margin: const EdgeInsets.all(20),
                         child: Row(
                           children: [
                             Expanded(
@@ -96,13 +96,13 @@ class _ProductScreenState extends State<ProductScreen> {
                       ),
 
                       //Searchbar button
-                      Searchbar(),
+                      const Searchbar(),
 
                       //DataTable  to show the data in the form of table
                       Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: AppColors.primary,
-                          borderRadius: const BorderRadius.only(
+                          borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(10),
                               topRight: Radius.circular(10)),
                         ),
@@ -115,14 +115,14 @@ class _ProductScreenState extends State<ProductScreen> {
                                 .snapshots(),
                             builder: (context, snapshot) {
                               if (!snapshot.hasData) {
-                                return Center(
+                                return const Center(
                                     child: CircularProgressIndicator());
                               }
                               var products = snapshot.data!.docs;
                               return SingleChildScrollView(
-                                  physics: BouncingScrollPhysics(),
+                                  physics: const BouncingScrollPhysics(),
                                   child: DataTable(
-                                    columns: [
+                                    columns: const [
                                       DataColumn(label: Text("Product Id")),
                                       DataColumn(label: Text("Name")),
                                       DataColumn(label: Text('Category')),
@@ -154,7 +154,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                                 onPressed: () {
                                                   _deleteProduct(docId);
                                                 },
-                                                icon: Icon(
+                                                icon: const Icon(
                                                   Icons.delete,
                                                   color: Colors.white,
                                                 ))
@@ -203,14 +203,14 @@ class _ProductScreenState extends State<ProductScreen> {
                                     .snapshots(),
                                 builder: (context, snapshot) {
                                   if (!snapshot.hasData) {
-                                    return Center(
+                                    return const Center(
                                         child: CircularProgressIndicator());
                                   }
                                   int categoryCount =
                                       snapshot.data!.docs.length;
                                   return Row(
                                     children: [
-                                      Text(
+                                      const Text(
                                         'Total Products:  ',
                                         style: TextStyle(
                                             color: Colors.black,
@@ -219,7 +219,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                       ),
                                       Text(
                                         '$categoryCount',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontFamily: 'Schyler',
                                             fontSize: 20,
                                             color: Colors.black),
@@ -238,13 +238,14 @@ class _ProductScreenState extends State<ProductScreen> {
                                 builder: (context, snapshot) {
                                   if (!snapshot.hasData) {
                                     return Center(
-                                        child: CircularProgressIndicator());
+                                        child:
+                                            const CircularProgressIndicator());
                                   }
                                   int categoryCount =
                                       snapshot.data!.docs.length;
                                   return Row(
                                     children: [
-                                      Text(
+                                      const Text(
                                         'Total Categories:  ',
                                         style: TextStyle(
                                             color: Colors.black,
@@ -253,7 +254,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                       ),
                                       Text(
                                         '$categoryCount',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontFamily: 'Schyler',
                                             fontSize: 20,
                                             color: Colors.black),

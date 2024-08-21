@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class CustomTextField extends StatefulWidget {
   final String label;
@@ -29,21 +28,21 @@ class _CustomTextFieldState extends State<CustomTextField> {
         onChanged: widget.onChanged,
         maxLength: widget.maxlines,
         controller: widget.controller,
-        style: TextStyle(
+        style: const TextStyle(
             color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
         decoration: InputDecoration(
           label: Text(
             widget.label,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
             ),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white, width: 1.0),
+            borderSide: const BorderSide(color: Colors.white, width: 1.0),
             borderRadius: BorderRadius.circular(10),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white, width: 1.0),
+            borderSide: const BorderSide(color: Colors.white, width: 1.0),
             borderRadius: BorderRadius.circular(10),
           ),
         ),

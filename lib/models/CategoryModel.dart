@@ -13,7 +13,10 @@ class CategoryModel with ChangeNotifier {
 
     if (categoryName.isNotEmpty && detail.isNotEmpty) {
       // Check if category already exists
-      DocumentSnapshot categoryDoc = await FirebaseFirestore.instance.collection('Categories').doc(categoryName).get();
+      DocumentSnapshot categoryDoc = await FirebaseFirestore.instance
+          .collection('Categories')
+          .doc(categoryName)
+          .get();
 
       if (categoryDoc.exists) {
         _showDuplicateCategoryDialog(context);
@@ -50,17 +53,19 @@ class CategoryModel with ChangeNotifier {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Error', style: TextStyle(color: Colors.black)),
-          content: Text('Please fill all the fields', style: TextStyle(color: Colors.black)),
+          title: const Text('Error', style: TextStyle(color: Colors.black)),
+          content: const Text('Please fill all the fields',
+              style: TextStyle(color: Colors.black)),
           actions: <Widget>[
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF6C63FF), // Use your primary color
+                backgroundColor:
+                    const Color(0xFF6C63FF), // Use your primary color
               ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('OK', style: TextStyle(color: Colors.white)),
+              child: const Text('OK', style: TextStyle(color: Colors.white)),
             )
           ],
         );
@@ -73,23 +78,23 @@ class CategoryModel with ChangeNotifier {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Error', style: TextStyle(color: Colors.black)),
-          content: Text('Category already exists', style: TextStyle(color: Colors.black)),
+          title: const Text('Error', style: TextStyle(color: Colors.black)),
+          content: const Text('Category already exists',
+              style: TextStyle(color: Colors.black)),
           actions: <Widget>[
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF6C63FF), // Use your primary color
+                backgroundColor:
+                    const Color(0xFF6C63FF), // Use your primary color
               ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('OK', style: TextStyle(color: Colors.white)),
+              child: const Text('OK', style: TextStyle(color: Colors.white)),
             )
           ],
         );
       },
     );
   }
-
-
 }

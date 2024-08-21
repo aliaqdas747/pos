@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:point_of_sale/models/sales_Model.dart';
 import 'package:point_of_sale/themes_Colors.dart';
-import 'package:point_of_sale/utils/Custom_dialog.dart';
 import 'package:point_of_sale/utils/Quantity_custom.dart';
 import 'package:point_of_sale/utils/TextField.dart';
 import 'package:point_of_sale/utils/drawer.dart';
@@ -17,7 +16,7 @@ class PointOfSale extends StatefulWidget {
 
 class _PointOfSaleState extends State<PointOfSale> {
   DateTime _selectedDate = DateTime.now();
-  TimeOfDay _selectedTime = TimeOfDay(hour: 12, minute: 0);
+  TimeOfDay _selectedTime = const TimeOfDay(hour: 12, minute: 0);
 
   Future<void> _deleteProduct(String docId) async {
     await FirebaseFirestore.instance.collection('Cart').doc(docId).delete();
@@ -29,7 +28,7 @@ class _PointOfSaleState extends State<PointOfSale> {
     return Scaffold(
       body: Row(
         children: [
-          DrawerWidget(
+          const DrawerWidget(
             title: 'POS',
             imagePath: 'assets/images/pos.png',
           ),
@@ -51,7 +50,7 @@ class _PointOfSaleState extends State<PointOfSale> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(
+                            margin: const EdgeInsets.only(
                                 left: 25, right: 25, bottom: 10, top: 5),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -62,7 +61,7 @@ class _PointOfSaleState extends State<PointOfSale> {
                                       .textTheme
                                       .headlineMedium,
                                 ),
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 ElevatedButton(
                                   onPressed: () async {
                                     final DateTime? picked =
@@ -79,9 +78,9 @@ class _PointOfSaleState extends State<PointOfSale> {
                                       });
                                     }
                                   },
-                                  child: Text('Select Date'),
+                                  child: const Text('Select Date'),
                                 ),
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 ElevatedButton(
                                   onPressed: () async {
                                     final TimeOfDay? picked =
@@ -96,12 +95,12 @@ class _PointOfSaleState extends State<PointOfSale> {
                                       });
                                     }
                                   },
-                                  child: Text('Select Time'),
+                                  child: const Text('Select Time'),
                                 ),
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 Text(
                                     'Selected Date: ${_selectedDate.day}/${_selectedDate.month}/${_selectedDate.year}'),
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 Text(
                                     'Selected Time: ${_selectedTime.hour}:${_selectedTime.minute}'),
                               ],
@@ -120,14 +119,14 @@ class _PointOfSaleState extends State<PointOfSale> {
                                   controller: saleModel.idController,
                                 ),
                               ),
-                              SizedBox(width: 10),
+                              const SizedBox(width: 10),
                               Expanded(
                                 child: DropdownSearchbar(
                                   nameController: saleModel.nameController,
                                   saleModel: saleModel,
                                 ),
                               ),
-                              SizedBox(width: 10),
+                              const SizedBox(width: 10),
                               Expanded(
                                 child: CustomTextField(
                                   controller: saleModel.quantityController,
@@ -135,7 +134,7 @@ class _PointOfSaleState extends State<PointOfSale> {
                                   isPassword: false,
                                 ),
                               ),
-                              SizedBox(width: 10),
+                              const SizedBox(width: 10),
                               Expanded(
                                 child: CustomTextField(
                                   controller: saleModel.priceController,
@@ -145,13 +144,13 @@ class _PointOfSaleState extends State<PointOfSale> {
                               ),
                             ],
                           ),
-                          Expanded(child: SizedBox()),
+                          const Expanded(child: SizedBox()),
                           Container(
                             color: AppColors.primary,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(
+                                const Row(
                                   children: [
                                     SubTotal(),
                                   ],
@@ -164,24 +163,24 @@ class _PointOfSaleState extends State<PointOfSale> {
                                           context,
                                         );
                                       },
-                                      icon: Icon(
+                                      icon: const Icon(
                                         Icons.shopping_cart_checkout,
                                         color: AppColors.primary,
                                       ),
-                                      label: Text("ADD to Cart"),
+                                      label: const Text("ADD to Cart"),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10,
                                     ),
                                     ElevatedButton.icon(
                                       onPressed: () async {
                                         saleModel.finalizeSale(context);
                                       },
-                                      icon: Icon(
+                                      icon: const Icon(
                                         Icons.receipt,
                                         color: AppColors.primary,
                                       ),
-                                      label: Text("Finalize"),
+                                      label: const Text("Finalize"),
                                     )
                                   ],
                                 )
@@ -192,9 +191,9 @@ class _PointOfSaleState extends State<PointOfSale> {
                       ),
                     ),
                     Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: AppColors.primary,
-                        borderRadius: const BorderRadius.only(
+                        borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(10),
                             topRight: Radius.circular(10)),
                       ),
@@ -207,13 +206,14 @@ class _PointOfSaleState extends State<PointOfSale> {
                             .snapshots(),
                         builder: (context, snapshot) {
                           if (!snapshot.hasData) {
-                            return Center(child: CircularProgressIndicator());
+                            return const Center(
+                                child: CircularProgressIndicator());
                           }
                           var cartProducts = snapshot.data!.docs;
                           return SingleChildScrollView(
-                            physics: BouncingScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             child: DataTable(
-                              columns: [
+                              columns: const [
                                 DataColumn(label: Text("Product Id")),
                                 DataColumn(label: Text("Name")),
                                 DataColumn(label: Text("Quantity")),
@@ -231,7 +231,7 @@ class _PointOfSaleState extends State<PointOfSale> {
                                   DataCell(Tooltip(
                                     message: 'Delete from table',
                                     child: IconButton(
-                                      icon: Icon(
+                                      icon: const Icon(
                                         Icons.delete,
                                         color: Colors.white,
                                       ),

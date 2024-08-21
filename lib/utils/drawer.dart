@@ -56,7 +56,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   title: 'Dashboard',
                   onPressed: () {
                     {
-                      Get.off(() => MyHomePage());
+                      Get.off(() => const MyHomePage());
                     }
                   }),
               CustomListTile(
@@ -70,43 +70,43 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   icon: Icons.shopping_bag,
                   title: 'PRODUCTS',
                   onPressed: () {
-                    Get.off(() => ProductScreen());
+                    Get.off(() => const ProductScreen());
                   }),
               CustomListTile(
                   icon: Icons.category,
                   title: 'CATEGORY',
                   onPressed: () {
-                    Get.off(() => CategoryScreen());
+                    Get.off(() => const CategoryScreen());
                   }),
               CustomListTile(
                   icon: Icons.recent_actors_rounded,
                   title: 'Sale Records',
                   onPressed: () {
-                    Get.off(() => SalesRecordPage());
+                    Get.off(() => SaleRecordsPage());
                   }),
               CustomListTile(
                   icon: Icons.mobile_friendly,
                   title: 'MOBILES',
                   onPressed: () {
-                    Get.off(() => MobileScreen());
+                    Get.off(() => const MobileScreen());
                   }),
               CustomListTile(
                   icon: Icons.science,
                   title: 'Lab',
                   onPressed: () {
-                    Get.off(() => LabScreen());
+                    Get.off(() => const LabScreen());
                   }),
               CustomListTile(
                   icon: Icons.signal_cellular_alt,
                   title: 'RECHARGES/LOADS',
                   onPressed: () {
-                    Get.off(() => RechargeScreen());
+                    Get.off(() => const RechargeScreen());
                   }),
               CustomListTile(
                   icon: Icons.supervised_user_circle,
                   title: 'USERS',
                   onPressed: () {
-                    Get.off(() => UserScreen());
+                    Get.off(() => const UserScreen());
                   }),
               // Add more ListTiles for other drawer items
             ],

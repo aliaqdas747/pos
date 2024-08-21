@@ -6,7 +6,7 @@ class home_cards extends StatefulWidget {
   final String cardImg;
   final VoidCallback OnPressed;
 
-  home_cards({
+  const home_cards({
     super.key,
     required this.title,
     required this.cardImg,
@@ -28,7 +28,7 @@ class _HomeCardsState extends State<home_cards> {
       child: GestureDetector(
         onTap: widget.OnPressed,
         child: Container(
-          margin: EdgeInsets.all(15),
+          margin: const EdgeInsets.all(15),
           decoration: BoxDecoration(
             color: AppColors.primary,
             borderRadius: BorderRadius.circular(10),
@@ -51,7 +51,7 @@ class _HomeCardsState extends State<home_cards> {
               Image.asset(widget.cardImg, height: 100),
               Text(
                 widget.title,
-                style: TextStyle(fontSize: 20, color: Colors.white),
+                style: const TextStyle(fontSize: 20, color: Colors.white),
               ),
             ],
           ),

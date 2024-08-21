@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:point_of_sale/themes_Colors.dart';
 
@@ -33,7 +32,7 @@ class _ProductScreenState extends State<MobileScreen> {
         ),
         body: Row(
           children: [
-            DrawerWidget(
+            const DrawerWidget(
               title: 'MOBILE',
               imagePath: 'assets/images/phone.png',
             ),
@@ -44,7 +43,7 @@ class _ProductScreenState extends State<MobileScreen> {
                   child: Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.all(20),
+                        margin: const EdgeInsets.all(20),
                         child: const Row(
                           children: [
                             Expanded(
@@ -87,25 +86,25 @@ class _ProductScreenState extends State<MobileScreen> {
                         child: SizedBox(
                           width: 100,
                           child: TextField(
-                            style: TextStyle(color: AppColors.primary),
+                            style: const TextStyle(color: AppColors.primary),
                             decoration: InputDecoration(
                               suffixIcon: IconButton(
                                 onPressed: () {},
-                                icon: Icon(Icons.search,
+                                icon: const Icon(Icons.search,
                                     color: AppColors.primary),
                               ),
-                              label: Text(
+                              label: const Text(
                                 "Search here...",
                                 style: TextStyle(
                                     color: AppColors.primary, fontSize: 25),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                     color: AppColors.primary, width: 1.0),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                     color: AppColors.primary, width: 1.0),
                                 borderRadius: BorderRadius.circular(10),
                               ),
@@ -114,9 +113,9 @@ class _ProductScreenState extends State<MobileScreen> {
                         ),
                       ),
                       Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             color: AppColors.primary,
-                            borderRadius: const BorderRadius.only(
+                            borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(10),
                                 topRight: Radius.circular(10))),
                         margin: const EdgeInsets.only(left: 20, right: 20),
@@ -230,9 +229,9 @@ class _ProductScreenState extends State<MobileScreen> {
                         ),
                       ),
                       Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             color: AppColors.primary,
-                            borderRadius: const BorderRadius.only(
+                            borderRadius: BorderRadius.only(
                                 bottomLeft: Radius.circular(10),
                                 bottomRight: Radius.circular(10))),
                         margin: const EdgeInsets.only(left: 20, right: 20),
