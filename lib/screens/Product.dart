@@ -196,6 +196,7 @@ class _ProductScreenState extends State<ProductScreen> {
                               ),
                             ),
 
+                            ///
                             Container(
                               child: StreamBuilder<QuerySnapshot>(
                                 stream: FirebaseFirestore.instance

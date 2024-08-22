@@ -196,37 +196,86 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
                     //Total Category Item
                     Container(
-                      decoration: const BoxDecoration(
-                        color: AppColors.primary,
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10)),
-                      ),
-                      margin:
-                          const EdgeInsets.only(left: 20, right: 20, top: 5),
                       width: double.infinity,
-                      child: StreamBuilder<QuerySnapshot>(
-                        stream: FirebaseFirestore.instance
-                            .collection('Categories')
-                            .snapshots(),
-                        builder: (context, snapshot) {
-                          if (!snapshot.hasData) {
-                            return const Center(
-                                child: CircularProgressIndicator());
-                          }
-                          int categoryCount = snapshot.data!.docs.length;
-                          return Wrap(
-                            alignment: WrapAlignment.end,
-                            children: [
-                              Expanded(
-                                flex: 10,
-                                child: SumryCard(
-                                    title: 'Total Categories:',
-                                    amount: '$categoryCount'),
-                              ),
-                            ],
-                          );
-                        },
+                      margin: const EdgeInsets.only(
+                          left: 20, right: 20, bottom: 10),
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      decoration: BoxDecoration(
+                        color: AppColors.secondary,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          ///
+                          Container(
+                            child: StreamBuilder<QuerySnapshot>(
+                              stream: FirebaseFirestore.instance
+                                  .collection('Products')
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                if (!snapshot.hasData) {
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                }
+                                int categoryCount = snapshot.data!.docs.length;
+                                return Row(
+                                  children: [
+                                    const Text(
+                                      'Total Products:  ',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                          fontFamily: 'Schyler'),
+                                    ),
+                                    Text(
+                                      '$categoryCount',
+                                      style: const TextStyle(
+                                          fontFamily: 'Schyler',
+                                          fontSize: 20,
+                                          color: Colors.black),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
+                          ),
+                          // Save for Later Button
+                          Container(
+                            child: StreamBuilder<QuerySnapshot>(
+                              stream: FirebaseFirestore.instance
+                                  .collection('Categories')
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                      child: const CircularProgressIndicator());
+                                }
+                                int categoryCount = snapshot.data!.docs.length;
+                                return Row(
+                                  children: [
+                                    const Text(
+                                      'Total Categories:  ',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                          fontFamily: 'Schyler'),
+                                    ),
+                                    Text(
+                                      '$categoryCount',
+                                      style: const TextStyle(
+                                          fontFamily: 'Schyler',
+                                          fontSize: 20,
+                                          color: Colors.black),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
+                          ),
+
+                          // Discard Sale Button
+                        ],
                       ),
                     ),
                   ],
