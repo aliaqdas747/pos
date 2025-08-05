@@ -42,6 +42,7 @@ class _ProductScreenState extends State<ProductScreen> {
           backgroundColor: AppColors.primary,
         ),
         body: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const DrawerWidget(
               title: 'PRODUCTS',
@@ -107,8 +108,8 @@ class _ProductScreenState extends State<ProductScreen> {
                               topRight: Radius.circular(10)),
                         ),
                         margin: const EdgeInsets.only(left: 20, right: 20),
-                        height: 350,
                         width: double.infinity,
+                        height: 500,
                         child: StreamBuilder<QuerySnapshot>(
                             stream: FirebaseFirestore.instance
                                 .collection('Products')

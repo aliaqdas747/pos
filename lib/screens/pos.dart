@@ -26,7 +26,10 @@ class _PointOfSaleState extends State<PointOfSale> {
   Widget build(BuildContext context) {
     final saleModel = Provider.of<SaleModel>(context);
     return Scaffold(
+      backgroundColor: AppColors.primary,
       body: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const DrawerWidget(
             title: 'POS',
@@ -157,17 +160,9 @@ class _PointOfSaleState extends State<PointOfSale> {
                                 ),
                                 Row(
                                   children: [
-                                    ElevatedButton.icon(
-                                      onPressed: () async {
-                                        await saleModel.AddCart(
-                                          context,
-                                        );
-                                      },
-                                      icon: const Icon(
-                                        Icons.shopping_cart_checkout,
-                                        color: AppColors.primary,
-                                      ),
-                                      label: const Text("ADD to Cart"),
+                                    ElevatedButton(
+                                      child: Text('Add to Cart'),
+                                      onPressed: () async {},
                                     ),
                                     const SizedBox(
                                       width: 10,

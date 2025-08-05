@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:point_of_sale/auth/loginScreen.dart';
 import 'package:point_of_sale/models/sales_Model.dart';
+import 'package:point_of_sale/themes_Colors.dart';
 import 'package:point_of_sale/utils/textTheme.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: true,
       theme: ThemeData(
         textTheme: TTextTheme.lightTextTheme,
-        primaryColor: const Color(0xFF6C63FF),
+        primaryColor: AppColors.primary,
         useMaterial3: true,
       ),
       home: const LoginScreen(),

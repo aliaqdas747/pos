@@ -12,7 +12,7 @@ class SaleModel with ChangeNotifier {
   TextEditingController priceController = TextEditingController();
 
 //Function to add product to cart
-  Future<void> AddCart(BuildContext context) async {
+   Future<void> AddCart(BuildContext context) async {
     final id = idController.text.trim();
     final name = nameController.text.trim();
     final quantity = quantityController.text.trim();
@@ -20,23 +20,29 @@ class SaleModel with ChangeNotifier {
 
     final idParsed = int.tryParse(id);
     final quantityParsed = int.tryParse(quantity);
+    final priceParsed = int.tryParse(price);
 
+    // Check if ID is valid
     if (idParsed == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Id box should have number')));
+        const SnackBar(content: Text('Id box should have a number')),
+      );
       return;
     }
 
-    final priceParsed = int.tryParse(price);
+    // Check if price is valid
     if (priceParsed == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Price box should have number')));
+        const SnackBar(content: Text('Price box should have a number')),
+      );
       return;
     }
 
     try {
+      // Fetch current stock from Firestore
       DocumentSnapshot currentStock =
           await FirebaseFirestore.instance.collection('Products').doc(id).get();
+
       if (currentStock.exists) {
         try {
           final totalPrice = priceParsed * quantityParsed!;
@@ -46,25 +52,34 @@ class SaleModel with ChangeNotifier {
             'Quantity': quantityParsed,
             'Price': totalPrice,
           };
-          await FirebaseFirestore.instance
-              .collection('Cart')
-              .doc()
-              .set(cartRecord);
+
+          // Save cart record to Firestore
+          await FirebaseFirestore.instance.collection('Cart').add(cartRecord);
+
+          // Clear input fields after successful addition
           idController.clear();
           nameController.clear();
           quantityController.text = '1';
           priceController.clear();
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+                content: Text('Product added to cart successfully!')),
+          );
         } catch (e) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text('Error:$e')));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error saving to cart: $e')),
+          );
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('This product not in stock records')));
+          const SnackBar(content: Text('This product is not in stock records')),
+        );
       }
     } catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Error:$e')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error fetching product: $e')),
+      );
     }
   }
 
@@ -274,6 +289,7 @@ class SaleModel with ChangeNotifier {
   }
 }
 
+//Product searchbar
 class DropdownSearchbar extends StatefulWidget {
   final TextEditingController nameController;
   final SaleModel saleModel;
